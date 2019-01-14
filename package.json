@@ -8,6 +8,8 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "ldapjs": "git+ssh://git@github.com/veobot/node-ldapjs"
+    "ldapjs": "git+ssh://git@github.com/veobot/node-ldapjs",
+    "radius": "^1.1.4",
+    "redis": "^2.8.0"
   }
 }
