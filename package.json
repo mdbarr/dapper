@@ -8,6 +8,7 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "barrkeep": "^1.3.3",
     "ldapjs": "git+ssh://git@github.com/veobot/node-ldapjs",
     "radius": "^1.1.4",
     "redis": "^2.8.0"
