@@ -9,14 +9,16 @@ const defaults = {
   },
   users: {
     ou: 'Users',
-    type: 'inetOrgPerson'
+    type: 'inetOrgPerson',
+    groupMembership: 'memberOf'
   },
   groups: {
     ou: 'Groups',
-    type: 'groupOfNames'
+    type: 'groupOfNames',
+    memberAttribute: 'member'
   },
   ldap: {
-    port: 389,
+    port: 389, // 'auto'
     requireAuthentication: false,
     bindDNs: []
   }
@@ -31,6 +33,7 @@ function Dapper(config = {}) {
 
   //////////
 
+  self.util = require('./util');
   self.models = require('./models');
 
   self.ldap = ldap.createServer();
