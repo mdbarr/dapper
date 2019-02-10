@@ -14,6 +14,8 @@ function Models() {
     metadata = {}
   }) {
     const model = {
+      object: 'user',
+
       name,
       email,
 
@@ -40,12 +42,39 @@ function Models() {
 
   self.group = function() {};
   self.organization = function() {}; // mfa required
-  self.organizationUnit = function() {};
+  self.organizationalUnit = function() {};
 
-  self.ldapUser = function() {};
+  self.ldapUser = function(user) {
+    const model = {
+      object: 'ldapUser',
+      objectClass: [
+        'top',
+        'person',
+        'organizationalPerson',
+        'inetOrgPerson'
+      ],
+
+      cn: user.metadata.cn || user.name,
+      displayName: user.metadata.displayName || user.name,
+
+      sn: user.metadata.sn || user.name.replace(/^(\w+)\s.*$/, '$1'),
+      givenName: user.metadata.givenName || user.name.replace(/^.*\s(\w+)$/, '$1'),
+
+      userPassword: user.password,
+
+      uid: user.metadata.uid || user.username,
+      mail: user.metadata.mail || user.email,
+
+      o: user.organizations,
+      ou: 'Users',
+      memberOf: user.groups
+    };
+
+    return model;
+  };
   self.ldapGroup = function() {};
   self.ldapOrganization = function() {};
-  self.ldapOrganizationUnit = function() {};
+  self.ldapOrganizationalUnit = function() {};
 
   return self;
 }
