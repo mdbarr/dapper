@@ -40,9 +40,44 @@ function Models() {
     return model;
   };
 
-  self.group = function() {};
-  self.organization = function() {}; // mfa required
-  self.organizationalUnit = function() {};
+  self.group = function({
+    name, members = [], options = {}, metadata = {}
+  }) {
+    const model = {
+      name,
+      members,
+      options,
+      metadata
+    };
+
+    return model;
+  };
+
+  self.organization = function({
+    name, items = [], options = {}, metadata = {}
+  }) {
+    const model = {
+      name,
+      items,
+      options, // e.g., mfa required
+      metadata
+    };
+
+    return model;
+  };
+
+  self.organizationalUnit = function({
+    name, items = [], options = {}, metadata = {}
+  }) {
+    const model = {
+      name,
+      items,
+      options,
+      metadata
+    };
+
+    return model;
+  };
 
   self.ldapUser = function(user) {
     const model = {
@@ -53,6 +88,8 @@ function Models() {
         'organizationalPerson',
         'inetOrgPerson'
       ],
+
+      dn: [],
 
       cn: user.metadata.cn || user.name,
       displayName: user.metadata.displayName || user.name,
