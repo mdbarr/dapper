@@ -1,19 +1,20 @@
 'use strict';
 
-function Models() {
+function Models(dapper) {
   const self = this;
 
   self.node = function() {};
   self.tree = function() {};
 
   self.user = function({
-    name, email,
+    id, name, email,
     username, password, mfa = false,
     organization, organizations = [],
     group, groups = [],
     metadata = {}
   }) {
     const model = {
+      id: id || dapper.util.id(),
       object: 'user',
 
       name,
@@ -116,4 +117,6 @@ function Models() {
   return self;
 }
 
-module.exports = new Models();
+module.exports = function(dapper) {
+  new Models(dapper);
+};

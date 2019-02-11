@@ -20,4 +20,6 @@ function Util() {
   return self;
 }
 
-module.exports = new Util();
+module.exports = function(dapper) {
+  return new Util(dapper);
+};

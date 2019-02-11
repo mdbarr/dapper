@@ -1,7 +1,6 @@
 'use strict';
 
 require('barrkeep');
-const ldap = require('ldapjs');
 
 const defaults = {
   tree: {
@@ -29,14 +28,16 @@ function Dapper(config = {}) {
 
   //////////
 
+  self.version = require('./package.json').version;
   self.config = Object.merge(defaults, config);
 
   //////////
 
-  self.util = require('./util');
-  self.models = require('./models');
+  self.util = require('./util')(self);
+  self.models = require('./models')(self);
 
-  self.ldap = ldap.createServer();
+  self.apiServer = require('./apiServer')(self);
+  self.ldapServer = require('./ldapServer')(self);
 
   //////////
 
