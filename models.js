@@ -42,9 +42,12 @@ function Models(dapper) {
   };
 
   self.group = function({
-    name, members = [], options = {}, metadata = {}
+    id, name, members = [], options = {}, metadata = {}
   }) {
     const model = {
+      id: id || dapper.util.id(),
+      object: 'group',
+
       name,
       members,
       options,
@@ -55,9 +58,12 @@ function Models(dapper) {
   };
 
   self.organization = function({
-    name, items = [], options = {}, metadata = {}
+    id, name, items = [], options = {}, metadata = {}
   }) {
     const model = {
+      id: id || dapper.util.id(),
+      object: 'organization',
+
       name,
       items,
       options, // e.g., mfa required
@@ -68,9 +74,12 @@ function Models(dapper) {
   };
 
   self.organizationalUnit = function({
-    name, items = [], options = {}, metadata = {}
+    id, name, items = [], options = {}, metadata = {}
   }) {
     const model = {
+      id: id || dapper.util.id(),
+      object: 'organizationalUnit',
+
       name,
       items,
       options,
@@ -90,7 +99,7 @@ function Models(dapper) {
         'inetOrgPerson'
       ],
 
-      dn: [],
+      dn: [ `id: ${ user.id }` ],
 
       cn: user.metadata.cn || user.name,
       displayName: user.metadata.displayName || user.name,
@@ -107,6 +116,8 @@ function Models(dapper) {
       ou: 'Users',
       memberOf: user.groups
     };
+
+    // generate DNs
 
     return model;
   };
