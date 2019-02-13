@@ -1,7 +1,7 @@
 'use strict';
 
-require('should');
 require('barrkeep');
+const should = require('should');
 const Dapper = require('../lib/dapper');
 const parseDN = require('ldapjs').parseDN;
 
@@ -27,6 +27,12 @@ describe('Model Spec', function() {
 
     user.should.be.ok();
     user.should.have.property('object', 'user');
+  });
+
+  it('should validate the user object password', function() {
+    user.password.should.not.equal('password');
+    user.password.should.startWith('sha256:');
+    should(dapper.util.validatePassword('password', user.password)).be.true();
   });
 
   it('should create an ldap user object', function() {
