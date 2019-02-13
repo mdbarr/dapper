@@ -3,7 +3,7 @@
 require('should');
 require('barrkeep');
 const Dapper = require('../lib/dapper');
-
+const parseDN = require('ldapjs').parseDN;
 
 describe('Model Spec', function() {
   let dapper;
@@ -36,5 +36,11 @@ describe('Model Spec', function() {
     ldapUser.should.have.property('object', 'ldapUser');
 
     console.pp(ldapUser);
+  });
+
+  it('should validate the ldap user DNs', function() {
+    for (const dn of ldapUser.dn) {
+      dn.should.equal(parseDN(dn).toString());
+    }
   });
 });
