@@ -3,13 +3,25 @@
 require('barrkeep');
 
 const defaults = {
-  tree: {
-    ordering: [ 'dc', 'o', 'ou' ]
+  options: {
+    dc: [ 'dc=example, dc=com' ],
+    parseEmailToDC: true, // parse email addresses as additional DCs
+    allowEmpty: true // allow empty fields for normal branches in the tree (dc, o)
   },
   users: {
     ou: 'Users',
     type: 'inetOrgPerson',
-    groupMembership: 'memberOf'
+    groupMembership: 'memberOf',
+    keys: [
+      'cn', 'uid', 'email'
+    ],
+    defaultPermissions: {
+      bind: true,
+      search: true,
+      add: false,
+      modify: 'self',
+      del: false
+    }
   },
   groups: {
     ou: 'Groups',
@@ -20,6 +32,9 @@ const defaults = {
     port: 389, // 'auto'
     requireAuthentication: false,
     bindDNs: []
+  },
+  api: {
+    port: 1389 // 'auto' (ldap.port + 1000)
   }
 };
 

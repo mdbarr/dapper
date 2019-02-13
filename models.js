@@ -18,15 +18,17 @@ function Models(dapper) {
       id: id || dapper.util.id(),
       object: 'user',
 
-      username,
-      password,
+      username, // required
+      password, // required
       mfa,
 
-      name,
-      email,
+      name, // required
+      email, // required
 
       organizations,
       groups,
+
+      permissions: [],
 
       metadata
     };
@@ -83,6 +85,7 @@ function Models(dapper) {
       object: 'organizationalUnit',
 
       name,
+      parent,
       items,
       options,
       metadata
@@ -98,10 +101,11 @@ function Models(dapper) {
         'top',
         'person',
         'organizationalPerson',
-        'inetOrgPerson'
+        dapper.config.users.type
       ],
 
-      dn: [ `id: ${ user.id }` ],
+      dn: null,
+      bind: null,
 
       cn: user.metadata.cn || user.name,
       displayName: user.metadata.displayName || user.name,
@@ -112,14 +116,45 @@ function Models(dapper) {
       userPassword: user.password,
 
       uid: user.metadata.uid || user.username,
-      mail: user.metadata.mail || user.email,
+      email: user.metadata.email || user.email,
 
       o: user.organizations,
       ou: dapper.config.users.ou,
       memberOf: user.groups
     };
 
+    //////////
     // generate DNs
+
+    const dn = new Set();
+    const bind = new Set();
+
+    // uuid - special case
+    const uuidDN = `uuid=${ user.id }`;
+    dn.add(uuidDN);
+    bind.add(uuidDN);
+
+    const dcs = dapper.util.Set(dapper.config.options.dc);
+    if (dapper.config.options.parseEmailToDC) {
+      dcs.add('dc=' + model.mail.replace(/^.*@/, '').split('.').join(', dc='));
+    }
+    const orgs = dapper.util.Set(model.o);
+
+    for (const dc of dcs) {
+      for (let o of orgs) {
+        o = 'o=' + o;
+        const ou = 'ou=' + model.ou;
+
+        for (let key of dapper.config.user.keys) {
+          key = `${ key }=${ model[key] }`;
+
+          dapper.util.toDN([ key, ou, o, dc ], dn, bind);
+        }
+      }
+    }
+
+    model.dn = new Array(dn);
+    model.bind = new Array(bind);
 
     return model;
   };
@@ -134,13 +169,13 @@ function Models(dapper) {
 
       dn: [ `id: ${ group.id }` ],
 
-      group: group.metadata.name || model.name,
+      group: group.metadata.name || group.name,
       member: group.members
     };
 
     // generate DNs
 
-    return group;
+    return model;
   };
 
   self.ldapOrganization = function() {};
