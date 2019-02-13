@@ -2,7 +2,7 @@
 
 'use strict';
 
-const Dapper = require('./dapper');
+const Dapper = require('./lib/dapper');
 
 const dapper = new Dapper();
 dapper.boot();
