@@ -7,8 +7,9 @@ function Models(dapper) {
   self.tree = function() {};
 
   self.user = function({
-    id, name, email,
+    id,
     username, password, mfa = false,
+    name, email,
     organization, organizations = [],
     group, groups = [],
     metadata = {}
@@ -17,12 +18,12 @@ function Models(dapper) {
       id: id || dapper.util.id(),
       object: 'user',
 
-      name,
-      email,
-
       username,
       password,
       mfa,
+
+      name,
+      email,
 
       organizations,
       groups,
@@ -58,13 +59,14 @@ function Models(dapper) {
   };
 
   self.organization = function({
-    id, name, items = [], options = {}, metadata = {}
+    id, name, parent = null, items = [], options = {}, metadata = {}
   }) {
     const model = {
       id: id || dapper.util.id(),
       object: 'organization',
 
       name,
+      parent,
       items,
       options, // e.g., mfa required
       metadata
@@ -74,7 +76,7 @@ function Models(dapper) {
   };
 
   self.organizationalUnit = function({
-    id, name, items = [], options = {}, metadata = {}
+    id, name, parent = null, items = [], options = {}, metadata = {}
   }) {
     const model = {
       id: id || dapper.util.id(),
@@ -113,7 +115,7 @@ function Models(dapper) {
       mail: user.metadata.mail || user.email,
 
       o: user.organizations,
-      ou: 'Users',
+      ou: dapper.config.users.ou,
       memberOf: user.groups
     };
 
@@ -121,7 +123,26 @@ function Models(dapper) {
 
     return model;
   };
-  self.ldapGroup = function() {};
+
+  self.ldapGroup = function(group) {
+    const model = {
+      object: 'ldapGroup',
+      objectClass: [
+        'group',
+        'groupOfNames'
+      ],
+
+      dn: [ `id: ${ group.id }` ],
+
+      group: group.metadata.name || model.name,
+      member: group.members
+    };
+
+    // generate DNs
+
+    return group;
+  };
+
   self.ldapOrganization = function() {};
   self.ldapOrganizationalUnit = function() {};
 
