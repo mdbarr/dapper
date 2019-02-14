@@ -22,7 +22,8 @@ describe('Model Spec', function() {
       password: 'password',
       name: 'Testy McTest',
       email: 'test@example.com',
-      organization: 'QA'
+      organizations: [ 'QA', 'Product' ],
+      groups: [ 'VPN', 'Vault' ]
     });
 
     user.should.be.ok();
