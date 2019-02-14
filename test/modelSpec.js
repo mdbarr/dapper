@@ -35,6 +35,14 @@ describe('Model Spec', function() {
     should(dapper.util.validatePassword('password', user.password)).be.true();
   });
 
+  it('should validate the user mfa token', function() {
+    user.mfa.should.be.ok();
+    user.mfa.should.have.length(32);
+
+    const token = dapper.util.generateToken(user.mfa);
+    should(dapper.util.validateToken(token, user.mfa)).be.true();
+  });
+
   it('should create an ldap user object', function() {
     ldapUser = dapper.models.ldapUser(user);
 
