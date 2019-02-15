@@ -28,6 +28,8 @@ describe('Model Spec', function() {
 
     user.should.be.ok();
     user.should.have.property('object', 'user');
+
+    console.debug(user);
   });
 
   it('should validate the user object password', function() {
@@ -50,7 +52,7 @@ describe('Model Spec', function() {
     ldapUser.should.be.ok();
     ldapUser.should.have.property('object', 'ldapUser');
 
-    console.pp(ldapUser);
+    console.debug(ldapUser);
   });
 
   it('should validate the ldap user DNs', function() {
