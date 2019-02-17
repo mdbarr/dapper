@@ -24,7 +24,7 @@ describe('Model Spec', function() {
       email: 'test@example.com',
       organizations: [ 'QA', 'Product' ],
       groups: [ 'VPN', 'Vault' ]
-    });
+    }, dapper.tree);
 
     user.should.be.ok();
     user.should.have.property('object', 'user');
