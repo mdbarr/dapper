@@ -46,7 +46,7 @@ describe('Model Spec', function() {
 
       organization.should.be.ok();
       organization.should.have.property('object', 'organization');
-      organization.should.have.property('name', 'testers');
+      organization.should.have.property('name', 'Testers');
     });
 
     it('should create and validate an ldap organization object', function() {
@@ -69,8 +69,8 @@ describe('Model Spec', function() {
 
       group.should.be.ok();
       group.should.have.property('object', 'group');
-      group.should.have.property('name', 'ui testers');
-      group.should.have.property('organization', 'testers');
+      group.should.have.property('name', 'UI Testers');
+      group.should.have.property('organization', 'Testers');
     });
 
     it('should create and validate an ldap group', function() {
@@ -120,11 +120,11 @@ describe('Model Spec', function() {
       ldapUser.should.be.ok();
       ldapUser.should.have.property('object', 'ldapUser');
 
-      console.debug(ldapUser);
+      console.pp(ldapUser);
     });
 
     it('should validate the ldap user DNs', function() {
-      for (const dn of ldapUser.dn) {
+      for (const dn of ldapUser.dns) {
         dn.should.equal(parseDN(dn).toString());
       }
     });
