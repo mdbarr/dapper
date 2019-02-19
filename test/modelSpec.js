@@ -41,19 +41,19 @@ describe('Model Spec', function() {
 
     it('should create and validate an organization model object', function() {
       organization = dapper.models.organization({
-        name: 'Testers'
+        name: 'Product'
       });
 
       organization.should.be.ok();
       organization.should.have.property('object', 'organization');
-      organization.should.have.property('name', 'Testers');
+      organization.should.have.property('name', 'Product');
     });
 
     it('should create and validate an ldap organization object', function() {
       ldapOrganization = dapper.models.ldapOrganization(organization);
       ldapOrganization.should.be.ok()
       ldapOrganization.should.have.property('object', 'ldapOrganization');
-      ldapOrganization.should.have.property('dn', 'o=testers');
+      ldapOrganization.should.have.property('dn', 'o=product');
     });
   });
 
@@ -63,14 +63,14 @@ describe('Model Spec', function() {
 
     it('should create and validate a group object', function() {
       group = dapper.models.group({
-        name: 'UI Testers',
-        organization: 'Testers'
+        name: 'VPN',
+        organization: 'Product'
       });
 
       group.should.be.ok();
       group.should.have.property('object', 'group');
-      group.should.have.property('name', 'UI Testers');
-      group.should.have.property('organization', 'Testers');
+      group.should.have.property('name', 'VPN');
+      group.should.have.property('organization', 'Product');
     });
 
     it('should create and validate an ldap group', function() {
@@ -120,7 +120,7 @@ describe('Model Spec', function() {
       ldapUser.should.be.ok();
       ldapUser.should.have.property('object', 'ldapUser');
 
-      console.pp(ldapUser);
+      console.debug(ldapUser);
     });
 
     it('should validate the ldap user DNs', function() {
