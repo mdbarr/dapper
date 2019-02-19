@@ -55,6 +55,12 @@ describe('Model Spec', function() {
       ldapOrganization.should.have.property('object', 'ldapOrganization');
       ldapOrganization.should.have.property('dn', 'o=product, dc=test, dc=example, dc=com');
     });
+
+    it('should validate the ldap organization DNs', function() {
+      for (const dn of ldapOrganization.dns) {
+        dn.should.equal(parseDN(dn).toString());
+      }
+    });
   });
 
   describe('Group Model Tests', function() {
@@ -77,6 +83,12 @@ describe('Model Spec', function() {
       ldapGroup = dapper.models.ldap.group(group);
       ldapGroup.should.be.ok();
       ldapGroup.should.have.property('object', 'ldapGroup');
+    });
+
+    it('should validate the ldap group DNs', function() {
+      for (const dn of ldapGroup.dns) {
+        dn.should.equal(parseDN(dn).toString());
+      }
     });
   });
 
