@@ -53,7 +53,7 @@ describe('Model Spec', function() {
       ldapOrganization = dapper.models.ldap.organization(organization);
       ldapOrganization.should.be.ok()
       ldapOrganization.should.have.property('object', 'ldapOrganization');
-      ldapOrganization.should.have.property('dn', 'o=product');
+      ldapOrganization.should.have.property('dn', 'o=product, dc=test, dc=example, dc=com');
     });
   });
 
