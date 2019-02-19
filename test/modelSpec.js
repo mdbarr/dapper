@@ -141,4 +141,25 @@ describe('Model Spec', function() {
       }
     });
   });
+
+  describe('Linkage Tests', function() {
+    it('should verify dynamic organization was created', function() {
+      dapper.tree.ldap.dns.should.have.key('o=qa');
+      dapper.tree.ldap.dns.should.have.key('o=qa, dc=test, dc=example, dc=com');
+    });
+
+    it('should verify dynamic group was created', function() {
+      dapper.tree.ldap.dns.should.have.key('cn=vault, ou=groups');
+      dapper.tree.ldap.dns.should.have.key('cn=vault, ou=groups, dc=test, dc=example, dc=com');
+    });
+
+    it('should verify dynamic user distinguished names', function() {
+      dapper.tree.ldap.dns.should.have.key('email=test@example.com, ou=users, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key('email=test@example.com, ou=users, dc=test, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key('login=test, ou=users, dc=test, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key('login=test@example.com, ou=users, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key('uid=test, ou=users, o=product, dc=test, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key('uid=test, ou=users, o=qa, dc=test, dc=example, dc=com');
+    });
+  });
 });
