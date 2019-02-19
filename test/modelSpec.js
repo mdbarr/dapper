@@ -28,7 +28,7 @@ describe('Model Spec', function() {
     });
 
     it('should create and validate an ldap domain object', function() {
-      ldapDomain = dapper.models.ldapDomain(domain);
+      ldapDomain = dapper.models.ldap.domain(domain);
       ldapDomain.should.be.ok();
       ldapDomain.should.have.property('object', 'ldapDomain');
       ldapDomain.should.have.property('dn', 'dc=test, dc=example, dc=com');
@@ -50,7 +50,7 @@ describe('Model Spec', function() {
     });
 
     it('should create and validate an ldap organization object', function() {
-      ldapOrganization = dapper.models.ldapOrganization(organization);
+      ldapOrganization = dapper.models.ldap.organization(organization);
       ldapOrganization.should.be.ok()
       ldapOrganization.should.have.property('object', 'ldapOrganization');
       ldapOrganization.should.have.property('dn', 'o=product');
@@ -74,7 +74,7 @@ describe('Model Spec', function() {
     });
 
     it('should create and validate an ldap group', function() {
-      ldapGroup = dapper.models.ldapGroup(group);
+      ldapGroup = dapper.models.ldap.group(group);
       ldapGroup.should.be.ok();
       ldapGroup.should.have.property('object', 'ldapGroup');
     });
@@ -115,7 +115,7 @@ describe('Model Spec', function() {
     });
 
     it('should create an ldap user object', function() {
-      ldapUser = dapper.models.ldapUser(user);
+      ldapUser = dapper.models.ldap.user(user);
 
       ldapUser.should.be.ok();
       ldapUser.should.have.property('object', 'ldapUser');
