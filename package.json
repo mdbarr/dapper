@@ -22,8 +22,8 @@
     "should": "^13.2.3"
   },
   "scripts": {
-    "lint": "eslint *.js lib/*.js",
+    "lint": "eslint *.js lib/*.js test/*.js",
     "start": "./index.js",
-    "test": "mocha"
+    "test": "mocha test/*Spec.js"
   }
 }
