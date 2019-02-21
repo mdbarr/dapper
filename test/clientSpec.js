@@ -3,6 +3,7 @@
 require('should');
 require('barrkeep');
 
+const ldap = require('ldapjs');
 const Dapper = require('../lib/dapper');
 
 describe('Client Spec', function() {
@@ -21,6 +22,27 @@ describe('Client Spec', function() {
 
     it('should boot the dapper instance', function(done) {
       dapper.boot(done);
+    });
+  });
+
+  describe('Client connection test', function() {
+    let client;
+
+    it('should create an ldap client', function() {
+      client = ldap.createClient({
+        url: 'ldap://127.0.0.1:389'
+      });
+    });
+
+    it('should bind to the ldap server', function(done) {
+      client.bind('uid=foo, ou=users, dc=dapper, dc=test', 'secret', function(error, result) {
+        console.pp(result.status);
+        done();
+      });
+    });
+
+    it('should close the client connection', function(done) {
+      client.unbind(done);
     });
   });
 
