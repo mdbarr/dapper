@@ -1,9 +1,9 @@
 'use strict';
 
-require('should');
 require('barrkeep');
 
 const ldap = require('ldapjs');
+const should = require('should');
 const Dapper = require('../lib/dapper');
 
 describe('Client Spec', function() {
@@ -34,9 +34,23 @@ describe('Client Spec', function() {
       });
     });
 
-    it('should bind to the ldap server', function(done) {
-      client.bind('uid=foo, ou=users, dc=dapper, dc=test', 'secret', function(error, result) {
-        console.pp(result.status);
+    it('should attempt to bind to the ldap server with a bad uid', function(done) {
+      client.bind('uid=test, ou=users, dc=dapper, dc=test', 'secret', function(error) {
+        should(error).not.be.null();
+        done();
+      });
+    });
+
+    it('should attempt to bind to the ldap server with a bad password', function(done) {
+      client.bind('uid=foo, ou=users, dc=dapper, dc=test', 'secret', function(error) {
+        should(error).not.be.null();
+        done();
+      });
+    });
+
+    it('should successfully bind to the ldap server', function(done) {
+      client.bind('uid=foo, ou=users, dc=dapper, dc=test', 'password', function(error, result) {
+        should(result).not.be.null();
         done();
       });
     });
