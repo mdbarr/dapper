@@ -6,11 +6,11 @@ const ldap = require('ldapjs');
 const should = require('should');
 const Dapper = require('../lib/dapper');
 
-describe('Client Spec', function() {
+describe('Bind Spec', function() {
   let dapper;
   let config;
 
-  describe('Instance creation test', function() {
+  describe('Instance Creation', function() {
     it('should load Sample Data A into memory', function() {
       config = require('./sampleDataA');
     });
@@ -25,7 +25,7 @@ describe('Client Spec', function() {
     });
   });
 
-  describe('Client connection test', function() {
+  describe('Bind Tests', function() {
     let client;
 
     it('should create an ldap client', function() {
