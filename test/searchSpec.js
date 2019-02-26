@@ -2,8 +2,8 @@
 
 require('barrkeep');
 
-const ldap = require('ldapjs');
 const should = require('should');
+const ldap = require('@mdbarr/ldapjs');
 const Dapper = require('../lib/dapper');
 
 function searchParser(error, res, callback) {

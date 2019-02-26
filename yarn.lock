@@ -18,6 +18,21 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@mdbarr/ldapjs@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@mdbarr/ldapjs/-/ldapjs-1.0.2.tgz#b3a6a3815ea403db2c4b7747abb150fb78b634ab"
+  integrity sha512-1ln6GsO547QUMbyhszfYEX6QZetvkvqh8dLP2/jg93LMbsG794QX58kftvcvuR0gyeiJsbBFjUsoVClnhDTu2Q==
+  dependencies:
+    asn1 "0.2.3"
+    assert-plus "^1.0.0"
+    backoff "^2.5.0"
+    bunyan "^1.8.3"
+    dashdash "^1.14.0"
+    ldap-filter "0.2.2"
+    once "^1.4.0"
+    vasync "^1.6.4"
+    verror "^1.8.1"
+
 acorn-jsx@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/acorn-jsx/-/acorn-jsx-5.0.1.tgz#32a064fd925429216a09b141102bfdd185fae40e"
@@ -1323,22 +1338,6 @@ ldap-filter@0.2.2:
   dependencies:
     assert-plus "0.1.5"
 
-"ldapjs@git+ssh://git@github.com/veobot/node-ldapjs":
-  version "1.0.2"
-  resolved "git+ssh://git@github.com/veobot/node-ldapjs#d0a7f29d886f31c26079b424482cdac5c0747775"
-  dependencies:
-    asn1 "0.2.3"
-    assert-plus "^1.0.0"
-    backoff "^2.5.0"
-    bunyan "^1.8.3"
-    dashdash "^1.14.0"
-    ldap-filter "0.2.2"
-    once "^1.4.0"
-    vasync "^1.6.4"
-    verror "^1.8.1"
-  optionalDependencies:
-    dtrace-provider "~0.8"
-
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.3.0.tgz#3b09924edf9f083c0490fdd4c0bc4421e04764ee"
@@ -1470,9 +1469,9 @@ mkdirp@0.5.1, mkdirp@^0.5.1, mkdirp@~0.5.1:
     minimist "0.0.8"
 
 mocha@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/mocha/-/mocha-6.0.1.tgz#c287da87913fa0edc4c44850ba8bc4fdbf20d3ea"
-  integrity sha512-tQzCxWqxSD6Oyg5r7Ptbev0yAMD8p+Vfh4snPFuiUsWqYj0eVYTDT2DkEY307FTj0WRlIWN9rWMMAUzRmijgVQ==
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/mocha/-/mocha-6.0.2.tgz#cdc1a6fdf66472c079b5605bac59d29807702d2c"
+  integrity sha512-RtTJsmmToGyeTznSOMoM6TPEk1A84FQaHIciKrRqARZx+B5ccJ5tXlmJzEKGBxZdqk9UjpRsesZTUkZmR5YnuQ==
   dependencies:
     ansi-colors "3.2.3"
     browser-stdout "1.3.1"
