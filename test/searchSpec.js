@@ -6,6 +6,35 @@ const ldap = require('ldapjs');
 const should = require('should');
 const Dapper = require('../lib/dapper');
 
+function searchParser(error, res, callback) {
+  if (error) {
+    return callback(error);
+  }
+
+  const result = {
+    reference: null,
+    items: [],
+    status: 0
+  };
+
+  res.on('searchEntry', function(entry) {
+    result.items.push(Object.clone(entry.object));
+  });
+
+  res.on('searchReference', function(referral) {
+    result.reference = referral.uris.join();
+  });
+
+  res.on('error', function(err) {
+    callback(err);
+  });
+
+  res.on('end', function(end) {
+    result.status = end.status;
+    callback(null, result);
+  });
+}
+
 describe('Search Spec', function() {
   let dapper;
   let config;
@@ -41,12 +70,16 @@ describe('Search Spec', function() {
 
   describe('Search Tests', function() {
     it('should perform and validate a base scope search', function(done) {
-      client.search('dc=dapper, dc=test', {
+      client.search('uid=foo, ou=users, dc=dapper, dc=test', {
         filter: '(dn=uid=foo, ou=users, dc=dapper, dc=test)'
-      }, function(error, result) {
-        result.should.be.ok();
-
-        done();
+      }, function(err, res) {
+        searchParser(err, res, function(error, result) {
+          result.should.have.property('items');
+          result.items.should.be.instanceOf(Array);
+          result.items.should.have.length(1);
+          result.items[0].should.have.property('dn', 'uid=foo, ou=users, dc=dapper, dc=test');
+          done();
+        });
       });
     });
   });
