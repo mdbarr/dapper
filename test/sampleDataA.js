@@ -37,16 +37,19 @@ module.exports = {
         'dapper.test'
       ],
       organizations: [
-        'qa', 'dev', 'product'
+        'QA', 'Dev', 'Product'
       ],
-      groups: [
-        'admins'
-      ],
+      groups: [ {
+        name: 'Admin',
+        organization: 'Dev'
+      } ],
       users: [ {
         username: 'foo',
         password: 'password',
         name: 'Fooey',
-        email: 'foo@dapper.test'
+        email: 'foo@dapper.test',
+        organizations: [ 'QA', 'Dev' ],
+        groups: [ 'Admin' ]
       } ]
     }
   }
