@@ -71,7 +71,7 @@ describe('Search Spec', function() {
   describe('Search Tests', function() {
     it('should perform and validate a base scope search', function(done) {
       client.search('uid=foo, ou=users, dc=dapper, dc=test', {
-        filter: '(dn=uid=foo, ou=users, dc=dapper, dc=test)'
+        filter: '(&(cn=Fooey)(email=foo@dapper.test))'
       }, function(err, res) {
         searchParser(err, res, function(error, result) {
           result.should.have.property('items');
