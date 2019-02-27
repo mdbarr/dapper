@@ -6,7 +6,8 @@ const should = require('should');
 const ldap = require('@mdbarr/ldapjs');
 const Dapper = require('../lib/dapper');
 
-function searchParser(error, res, callback) {
+function searchParser(dapper, error, res, callback) {
+  callback = dapper.util.callback(callback);
   if (error) {
     return callback(error);
   }
@@ -73,11 +74,30 @@ describe('Search Spec', function() {
       client.search('uid=foo, ou=users, o=qa, dc=dapper, dc=test', {
         filter: '(&(cn=Fooey)(email=foo@dapper.test))'
       }, function(err, res) {
-        searchParser(err, res, function(error, result) {
+        searchParser(dapper, err, res, function(error, result) {
           result.should.have.property('items');
           result.items.should.be.instanceOf(Array);
           result.items.should.have.length(1);
           result.items[0].should.have.property('dn', 'uid=foo, ou=users, o=qa, dc=dapper, dc=test');
+          done();
+        });
+      });
+    });
+
+    it('should perform and validate a sub scope search with attributes', function(done) {
+      client.search('dc=dapper, dc=test', {
+        filter: '(&(o=QA)(email=*@dapper.test))',
+        scope: 'sub',
+        attributes: [ 'dn', 'sn', 'cn' ]
+      }, function(err, res) {
+        searchParser(dapper, err, res, function(error, result) {
+          result.should.have.property('items');
+          result.items.should.be.instanceOf(Array);
+          result.items.should.have.length(1);
+          result.items[0].should.have.property('dn', 'cn=fooey, ou=users, dc=dapper, dc=test');
+          result.items[0].should.have.property('cn', 'Fooey');
+          result.items[0].should.have.property('sn', 'Fooey');
+          result.items[0].should.not.have.property('email');
           done();
         });
       });
