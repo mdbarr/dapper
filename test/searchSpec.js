@@ -102,6 +102,22 @@ describe('Search Spec', function() {
         });
       });
     });
+
+    it('should perform and validate a one scope search with attributes', function(done) {
+      client.search('dc=dapper, dc=test', {
+        filter: '(&(o=QA)(objectclass=organization))',
+        scope: 'one',
+        attributes: [ 'dn', 'o' ]
+      }, function(err, res) {
+        searchParser(dapper, err, res, function(error, result) {
+          result.should.have.property('items');
+          result.items.should.be.instanceOf(Array);
+          result.items.should.have.length(1);
+          result.items[0].should.have.property('o', 'QA');
+          done();
+        });
+      });
+    });
   });
 
   describe('Clean up', function() {
