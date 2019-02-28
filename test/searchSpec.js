@@ -62,7 +62,7 @@ describe('Search Spec', function() {
     });
 
     it('should successfully bind to the ldap server', function(done) {
-      client.bind('uid=foo, ou=users, dc=dapper, dc=test', 'password', function(error, result) {
+      client.bind('uid=foo, ou=Users, dc=dapper, dc=test', 'password', function(error, result) {
         should(result).not.be.null();
         done();
       });
@@ -71,14 +71,14 @@ describe('Search Spec', function() {
 
   describe('Search Tests', function() {
     it('should perform and validate a base scope search', function(done) {
-      client.search('uid=foo, ou=users, o=qa, dc=dapper, dc=test', {
+      client.search('uid=foo, ou=Users, o=QA, dc=dapper, dc=test', {
         filter: '(&(cn=Fooey)(email=foo@dapper.test))'
       }, function(err, res) {
         searchParser(dapper, err, res, function(error, result) {
           result.should.have.property('items');
           result.items.should.be.instanceOf(Array);
           result.items.should.have.length(1);
-          result.items[0].should.have.property('dn', 'uid=foo, ou=users, o=qa, dc=dapper, dc=test');
+          result.items[0].should.have.property('dn', 'uid=foo, ou=Users, o=QA, dc=dapper, dc=test');
           done();
         });
       });
@@ -94,7 +94,7 @@ describe('Search Spec', function() {
           result.should.have.property('items');
           result.items.should.be.instanceOf(Array);
           result.items.should.have.length(1);
-          result.items[0].should.have.property('dn', 'cn=fooey, ou=users, dc=dapper, dc=test');
+          result.items[0].should.have.property('dn', 'cn=Fooey, ou=Users, dc=dapper, dc=test');
           result.items[0].should.have.property('cn', 'Fooey');
           result.items[0].should.have.property('sn', 'Fooey');
           result.items[0].should.not.have.property('email');

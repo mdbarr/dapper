@@ -35,21 +35,21 @@ describe('Bind Spec', function() {
     });
 
     it('should attempt to bind to the ldap server with a bad uid', function(done) {
-      client.bind('uid=test, ou=users, dc=dapper, dc=test', 'secret', function(error) {
+      client.bind('uid=test, ou=Users, dc=dapper, dc=test', 'secret', function(error) {
         should(error).not.be.null();
         done();
       });
     });
 
     it('should attempt to bind to the ldap server with a bad password', function(done) {
-      client.bind('uid=foo, ou=users, dc=dapper, dc=test', 'secret', function(error) {
+      client.bind('uid=foo, ou=Users, dc=dapper, dc=test', 'secret', function(error) {
         should(error).not.be.null();
         done();
       });
     });
 
     it('should successfully bind to the ldap server', function(done) {
-      client.bind('uid=foo, ou=users, dc=dapper, dc=test', 'password', function(error, result) {
+      client.bind('uid=foo, ou=Users, dc=dapper, dc=test', 'password', function(error, result) {
         should(result).not.be.null();
         done();
       });
