@@ -62,7 +62,7 @@ describe('Search Spec', function() {
     });
 
     it('should successfully bind to the ldap server', function(done) {
-      client.bind('uid=foo, ou=Users, dc=dapper, dc=test', 'password', function(error, result) {
+      client.bind('uid=foo, ou=Users, o=QA, dc=dapper, dc=test', 'password', function(error, result) {
         should(result).not.be.null();
         done();
       });
