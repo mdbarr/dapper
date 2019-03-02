@@ -12,12 +12,11 @@
     "barrkeep": "^1.3.3",
     "otplib": "^10.0.1",
     "radius": "^1.1.4",
-    "redis": "^2.8.0",
     "restify": "^8.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "eslint": "^5.14.1",
+    "eslint": "^5.15.0",
     "mocha": "^6.0.1",
     "should": "^13.2.3"
   },
