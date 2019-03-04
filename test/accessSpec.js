@@ -12,8 +12,8 @@ describe('Access Spec', function() {
   let client;
 
   describe('Instance Creation', function() {
-    it('should load Sample Data A into memory', function() {
-      config = require('./sampleDataA');
+    it('should load access testing configuration into memory', function() {
+      config = require('./configs/accessConfig');
     });
 
     it('should create a new Dapper instance', function() {
@@ -34,8 +34,9 @@ describe('Access Spec', function() {
 
   describe('Access Tests', function() {
     it('should successfully bind to the ldap server', function(done) {
-      client.bind('uid=foo, ou=Users, o=QA, dc=dapper, dc=test', 'password', function(error, result) {
-        should(result).not.be.null();
+      client.bind('uid=foo, ou=Users, o=QA, dc=dapper, dc=test', 'secure', function(error, result) {
+        should(error).be.null();
+        should(result).be.ok();
         done();
       });
     });
