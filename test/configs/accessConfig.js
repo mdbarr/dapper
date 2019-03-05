@@ -41,7 +41,7 @@ module.exports = {
         {
           name: 'VPN',
           options: {
-            requireMFA: true
+            mfaRequired: true
           }
         }
       ],

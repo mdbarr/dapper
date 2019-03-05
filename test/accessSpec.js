@@ -32,7 +32,7 @@ describe('Access Spec', function() {
     });
   });
 
-  describe('Access Tests', function() {
+  describe('Access Tests - Search Permission', function() {
     it('should successfully bind to the ldap server', function(done) {
       client.bind('uid=foo, ou=Users, o=QA, dc=dapper, dc=test', 'secure', function(error, result) {
         should(error).be.null();
@@ -51,8 +51,17 @@ describe('Access Spec', function() {
 
         res.on('end', function() {
           throw new Error('search should have failed');
-          done();
         });
+      });
+    });
+  });
+
+  describe('Access Tests - MFA Required', function() {
+    it('should successfully bind to the ldap server', function(done) {
+      client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret', function(error, result) {
+        should(error).be.null();
+        should(result).be.ok();
+        done();
       });
     });
   });
