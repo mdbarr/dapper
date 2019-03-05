@@ -57,8 +57,23 @@ describe('Access Spec', function() {
   });
 
   describe('Access Tests - MFA Required', function() {
-    it('should successfully bind to the ldap server', function(done) {
+    it('should fail binding without an mfa token', function(done) {
       client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret', function(error, result) {
+        should(error).not.be.null();
+        done();
+      });
+    });
+
+    it('should fail binding without a bad mfa token', function(done) {
+      client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret' + '000000', function(error, result) {
+        should(error).not.be.null();
+        done();
+      });
+    });
+
+    it('should successfully bind to the ldap server', function(done) {
+      const token = dapper.util.generateToken(config.datastore.data.users[1].mfa);
+      client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret' + token, function(error, result) {
         should(error).be.null();
         should(result).be.ok();
         done();
