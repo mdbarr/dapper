@@ -60,6 +60,7 @@ describe('Access Spec', function() {
     it('should fail binding without an mfa token', function(done) {
       client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret', function(error, result) {
         should(error).not.be.null();
+        should(result).be.undefined();
         done();
       });
     });
@@ -67,6 +68,7 @@ describe('Access Spec', function() {
     it('should fail binding without a bad mfa token', function(done) {
       client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret' + '000000', function(error, result) {
         should(error).not.be.null();
+        should(result).be.undefined();
         done();
       });
     });
