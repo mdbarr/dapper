@@ -37,7 +37,13 @@ module.exports = {
         'dapper.test'
       ],
       organizations: [
-        'QA', 'Dev', 'Product'
+        'QA', 'Dev', 'Product',
+        {
+          name: 'VPN',
+          options: {
+            requireMFA: true
+          }
+        }
       ],
       groups: [ {
         name: 'Admin',
@@ -60,7 +66,20 @@ module.exports = {
         mfa: 'OQZEUKZPJB5DINCRJBXDS5SRJRMVUVLI',
         name: 'Barley Testerly',
         email: 'bar@dapper.test',
-        organizations: [ 'Dev' ]
+        organizations: [ 'Dev', 'VPN' ],
+        attributes: {
+          mfaEnabled: true
+        }
+      }, {
+        username: 'baz',
+        password: '12345',
+        mfa: 'I54FGVDNGNGTEM3GOA3G2YKSKN3XQ33G',
+        name: 'Bazman Testlington',
+        email: 'baz@dapper.test',
+        organizations: [ 'Product' ],
+        attributes: {
+          accountLocked: true
+        }
       } ]
     }
   }

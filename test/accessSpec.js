@@ -40,6 +40,21 @@ describe('Access Spec', function() {
         done();
       });
     });
+
+    it('should fail searching bind user', function(done) {
+      client.search('uid=foo, ou=Users, o=QA, dc=dapper, dc=test', {
+        filter: '(&(cn=Fooey)(email=foo@dapper.test))'
+      }, function(err, res) {
+        res.on('error', function() {
+          done();
+        });
+
+        res.on('end', function() {
+          throw new Error('search should have failed');
+          done();
+        });
+      });
+    });
   });
 
   describe('Clean up', function() {
