@@ -88,8 +88,8 @@ describe('Access Spec', function() {
       client.unbind(done);
     });
 
-    it('should stop the dapper instance', function() {
-      dapper.shutdown();
+    it('should stop the dapper instance', function(done) {
+      dapper.shutdown(done);
     });
   });
 });
