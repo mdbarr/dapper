@@ -119,6 +119,25 @@ describe('Search Spec', function() {
         });
       });
     });
+
+    it('should perform and validate a sub scope search for group membership', function(done) {
+      client.search('dc=dapper, dc=test', {
+        filter: '(memberOf=cn=Admin, ou=Groups, o=Dev, dc=dapper, dc=test)',
+        scope: 'sub',
+        attributes: [ 'dn', 'sn', 'cn' ]
+      }, function(err, res) {
+        searchParser(dapper, err, res, function(error, result) {
+          result.should.have.property('items');
+          result.items.should.be.instanceOf(Array);
+          result.items.should.have.length(1);
+          result.items[0].should.have.property('dn', 'cn=Fooey, ou=Users, dc=dapper, dc=test');
+          result.items[0].should.have.property('cn', 'Fooey');
+          result.items[0].should.have.property('sn', 'Fooey');
+          result.items[0].should.not.have.property('email');
+          done();
+        });
+      });
+    });
   });
 
   describe('Clean up', function() {
