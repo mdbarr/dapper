@@ -18,7 +18,7 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@mdbarr/ldapjs@^1.0.3":
+"@mdbarr/ldapjs@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@mdbarr/ldapjs/-/ldapjs-1.0.5.tgz#a3433eb4ef5cd0cbbc7a3c603625789d627dc314"
   integrity sha512-4gmxzDU5st4v7GfECsmU5vMW5fymNwq/RZsflvpin7gSXnbYD4bzg3UQPt2IFli3cAfYmvvaK5oIElB8YvOudw==
