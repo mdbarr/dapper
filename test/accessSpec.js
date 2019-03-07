@@ -13,7 +13,7 @@ describe('Access Spec', function() {
 
   describe('Instance Creation', function() {
     it('should load access testing configuration into memory', function() {
-      config = require('./configs/accessConfig');
+      config = require('./configs/mfaConfig');
     });
 
     it('should create a new Dapper instance', function() {
