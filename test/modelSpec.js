@@ -1,8 +1,8 @@
 'use strict';
 
-require('barrkeep');
 const should = require('should');
 const Dapper = require('../lib/dapper');
+
 const parseDN = require('@mdbarr/ldapjs').parseDN;
 
 describe('Model Spec', function() {

@@ -1,7 +1,5 @@
 'use strict';
 
-require('barrkeep');
-
 const should = require('should');
 const ldap = require('@mdbarr/ldapjs');
 const Dapper = require('../lib/dapper');
