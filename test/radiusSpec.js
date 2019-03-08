@@ -31,44 +31,38 @@ describe('Radius Spec', function() {
 
   describe('Access Request Tests', function() {
     it('should send and validate a successful access request', function(done) {
-      const packet = client.packet();
-
-      client.send(packet, function(error, response) {
+      client.request(function(error, response) {
         should(error).be.null();
 
         should(response).be.ok();
-        response.should.have.property('code', client.constants.accept);
+        response.should.have.property('code', client.constants.accepted);
 
         done();
       });
     });
 
     it('should send and validate an unsuccessful access request', function(done) {
-      const packet = client.packet({
+      client.request({
         password: 'bad-password'
-      });
-
-      client.send(packet, function(error, response) {
+      }, function(error, response) {
         should(error).be.null();
 
         should(response).be.ok();
-        response.should.have.property('code', client.constants.reject);
+        response.should.have.property('code', client.constants.rejected);
 
         done();
       });
     });
 
     it('should send and validate an access request with a bad secret', function(done) {
-      const packet = client.packet({
+      client.request({
         secret: 'bad-secret'
-      });
-
-      client.send(packet, function(error, response) {
+      }, function(error, response) {
         should(error).be.ok();
-        error.should.equal(client.constants.reject);
+        error.should.equal(client.constants.rejected);
 
         should(response).be.ok();
-        response.should.have.property('code', client.constants.reject);
+        response.should.have.property('code', client.constants.rejected);
 
         done();
       });

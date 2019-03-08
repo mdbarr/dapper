@@ -11,19 +11,19 @@ function RadiusClient(dapper) {
   //////////
 
   self.constants = {
-    accept: 'Access-Accept',
+    accepted: 'Access-Accept',
     ip: 'NAS-IP-Address',
     password: 'User-Password',
-    reject: 'Access-Reject',
+    rejected: 'Access-Reject',
     request: 'Access-Request',
     username: 'User-Name'
   };
 
   //////////
 
-  const packets = {};
+  const requests = {};
   const handlers = {};
-  let packetCount = 0;
+  let requestCount = 0;
 
   //////////
 
@@ -33,7 +33,7 @@ function RadiusClient(dapper) {
       secret: dapper.config.radius.secret
     });
 
-    const request = packets[response.identifier];
+    const request = requests[response.identifier];
 
     const valid = radius.verify_response({
       response: message,
@@ -51,15 +51,27 @@ function RadiusClient(dapper) {
 
   //////////
 
-  self.packet = function({
+  self.send = function(request, callback) {
+    handlers[request.identifier] = callback;
+
+    const encoded = radius.encode(request);
+    requests[request.identifier] = {
+      raw_packet: encoded,
+      secret: request.secret
+    };
+
+    socket.send(encoded, 0, encoded.length, dapper.config.radius.port, 'localhost');
+  };
+
+  self.request = function({
     code = self.constants.request,
     secret = dapper.config.radius.secret,
-    identifier = ++packetCount,
+    identifier = ++requestCount,
     ip = '127.0.0.1',
     username = dapper.config.datastore.data.users[0].username,
     password = dapper.config.datastore.data.users[0].password
-  } = {}) {
-    const packet = {
+  } = {}, done) {
+    const request = {
       code,
       secret,
       identifier,
@@ -70,19 +82,19 @@ function RadiusClient(dapper) {
       ]
     };
 
-    return packet;
-  };
+    if (typeof arguments[0] === 'function' && !done) {
+      done = arguments[0];
+    }
 
-  self.send = function(packet, callback) {
-    handlers[packet.identifier] = callback;
+    Object.private(request, 'send', function(callback) {
+      self.send(request, callback);
+    });
 
-    const encoded = radius.encode(packet);
-    packets[packet.identifier] = {
-      raw_packet: encoded,
-      secret: packet.secret
-    };
+    if (typeof done === 'function') {
+      request.send(done);
+    }
 
-    socket.send(encoded, 0, encoded.length, dapper.config.radius.port, 'localhost');
+    return request;
   };
 
   //////////
