@@ -1,12 +1,8 @@
 'use strict';
 
 module.exports = {
-  radius: {
-    secret: 'secure'
-  },
-  api: {
-    enabled: false
-  },
+  radius: { secret: 'secure' },
+  api: { enabled: false },
   datastore: {
     provider: 'memory',
     data: {

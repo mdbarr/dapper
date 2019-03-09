@@ -16,51 +16,51 @@ function searchParser(dapper, error, res, callback) {
     status: 0
   };
 
-  res.on('searchEntry', function(entry) {
+  res.on('searchEntry', (entry) => {
     result.items.push(Object.clone(entry.object));
   });
 
-  res.on('searchReference', function(referral) {
+  res.on('searchReference', (referral) => {
     result.reference = referral.uris.join();
   });
 
-  res.on('error', function(err) {
+  res.on('error', (err) => {
     callback(err);
   });
 
-  res.on('end', function(end) {
+  res.on('end', (end) => {
     result.status = end.status;
     callback(null, result);
   });
+
+  return res;
 }
 
-describe('Search Spec', function() {
+describe('Search Spec', () => {
   let dapper;
   let config;
   let client;
 
-  describe('Instance Creation', function() {
-    it('should load simple configuration into memory', function() {
+  describe('Instance Creation', () => {
+    it('should load simple configuration into memory', () => {
       config = require('./configs/simpleConfig.js');
     });
 
-    it('should create a new Dapper instance', function() {
+    it('should create a new Dapper instance', () => {
       dapper = new Dapper(config);
       dapper.should.be.ok();
     });
 
-    it('should boot the dapper instance', function(done) {
+    it('should boot the dapper instance', (done) => {
       dapper.boot(done);
     });
 
-    it('should create an ldap client', function() {
-      client = ldap.createClient({
-        url: 'ldap://127.0.0.1:389'
-      });
+    it('should create an ldap client', () => {
+      client = ldap.createClient({ url: 'ldap://127.0.0.1:389' });
     });
 
-    it('should successfully bind to the ldap server', function(done) {
-      client.bind('uid=foo, ou=Users, o=QA, dc=dapper, dc=test', 'password', function(error, result) {
+    it('should successfully bind to the ldap server', (done) => {
+      client.bind('uid=foo, ou=Users, o=QA, dc=dapper, dc=test', 'password', (error, result) => {
         should(error).be.null();
         should(result).be.ok();
         done();
@@ -68,28 +68,27 @@ describe('Search Spec', function() {
     });
   });
 
-  describe('Search Tests', function() {
-    it('should perform and validate a base scope search', function(done) {
-      client.search('uid=foo, ou=Users, o=QA, dc=dapper, dc=test', {
-        filter: '(&(cn=Fooey)(email=foo@dapper.test))'
-      }, function(err, res) {
-        searchParser(dapper, err, res, function(error, result) {
-          result.should.have.property('items');
-          result.items.should.be.instanceOf(Array);
-          result.items.should.have.length(1);
-          result.items[0].should.have.property('dn', 'uid=foo, ou=Users, o=QA, dc=dapper, dc=test');
-          done();
+  describe('Search Tests', () => {
+    it('should perform and validate a base scope search', (done) => {
+      client.search('uid=foo, ou=Users, o=QA, dc=dapper, dc=test',
+        { filter: '(&(cn=Fooey)(email=foo@dapper.test))' }, (err, res) => {
+          searchParser(dapper, err, res, (error, result) => {
+            result.should.have.property('items');
+            result.items.should.be.instanceOf(Array);
+            result.items.should.have.length(1);
+            result.items[0].should.have.property('dn', 'uid=foo, ou=Users, o=QA, dc=dapper, dc=test');
+            done();
+          });
         });
-      });
     });
 
-    it('should perform and validate a sub scope search with attributes', function(done) {
+    it('should perform and validate a sub scope search with attributes', (done) => {
       client.search('dc=dapper, dc=test', {
         filter: '(&(o=QA)(email=*@dapper.test))',
         scope: 'sub',
         attributes: [ 'dn', 'sn', 'cn' ]
-      }, function(err, res) {
-        searchParser(dapper, err, res, function(error, result) {
+      }, (err, res) => {
+        searchParser(dapper, err, res, (error, result) => {
           result.should.have.property('items');
           result.items.should.be.instanceOf(Array);
           result.items.should.have.length(1);
@@ -102,13 +101,13 @@ describe('Search Spec', function() {
       });
     });
 
-    it('should perform and validate a one scope search with attributes', function(done) {
+    it('should perform and validate a one scope search with attributes', (done) => {
       client.search('dc=dapper, dc=test', {
         filter: '(&(o=QA)(objectclass=organization))',
         scope: 'one',
         attributes: [ 'dn', 'o' ]
-      }, function(err, res) {
-        searchParser(dapper, err, res, function(error, result) {
+      }, (err, res) => {
+        searchParser(dapper, err, res, (error, result) => {
           result.should.have.property('items');
           result.items.should.be.instanceOf(Array);
           result.items.should.have.length(1);
@@ -118,13 +117,13 @@ describe('Search Spec', function() {
       });
     });
 
-    it('should perform and validate a sub scope search for group membership', function(done) {
+    it('should perform and validate a sub scope search for group membership', (done) => {
       client.search('dc=dapper, dc=test', {
         filter: '(memberOf=cn=Admin, ou=Groups, o=Dev, dc=dapper, dc=test)',
         scope: 'sub',
         attributes: [ 'dn', 'sn', 'cn' ]
-      }, function(err, res) {
-        searchParser(dapper, err, res, function(error, result) {
+      }, (err, res) => {
+        searchParser(dapper, err, res, (error, result) => {
           result.should.have.property('items');
           result.items.should.be.instanceOf(Array);
           result.items.should.have.length(1);
@@ -138,12 +137,12 @@ describe('Search Spec', function() {
     });
   });
 
-  describe('Clean up', function() {
-    it('should close the client connection', function(done) {
+  describe('Clean up', () => {
+    it('should close the client connection', (done) => {
       client.unbind(done);
     });
 
-    it('should stop the dapper instance', function(done) {
+    it('should stop the dapper instance', (done) => {
       dapper.shutdown(done);
     });
   });

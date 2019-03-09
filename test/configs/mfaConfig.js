@@ -1,12 +1,8 @@
 'use strict';
 
 module.exports = {
-  radius: {
-    secret: 'secure'
-  },
-  api: {
-    enabled: false
-  },
+  radius: { secret: 'secure' },
+  api: { enabled: false },
   datastore: {
     provider: 'memory',
     data: {
@@ -17,9 +13,7 @@ module.exports = {
         'QA', 'Dev', 'Product',
         {
           name: 'VPN',
-          options: {
-            mfaRequired: true
-          }
+          options: { mfaRequired: true }
         }
       ],
       groups: [ {
@@ -34,9 +28,7 @@ module.exports = {
         email: 'foo@dapper.test',
         organizations: [ 'QA', 'Dev' ],
         groups: [ 'Admin' ],
-        permissions: {
-          search: false
-        }
+        permissions: { search: false }
       }, {
         username: 'bar',
         password: 'secret',
@@ -44,9 +36,7 @@ module.exports = {
         name: 'Barley Testerly',
         email: 'bar@dapper.test',
         organizations: [ 'Dev', 'VPN' ],
-        attributes: {
-          mfaEnabled: true
-        }
+        attributes: { mfaEnabled: true }
       }, {
         username: 'baz',
         password: '12345',
@@ -54,9 +44,7 @@ module.exports = {
         name: 'Bazman Testlington',
         email: 'baz@dapper.test',
         organizations: [ 'Product' ],
-        attributes: {
-          accountLocked: true
-        }
+        attributes: { accountLocked: true }
       } ]
     }
   }

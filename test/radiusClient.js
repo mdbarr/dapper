@@ -37,7 +37,7 @@ function RadiusClient(dapper) {
 
     const valid = radius.verify_response({
       response: message,
-      request: request.raw_packet,
+      request: request.rawPacket,
       secret: request.secret
     });
 
@@ -45,8 +45,10 @@ function RadiusClient(dapper) {
       const callback = handlers[response.identifier];
       delete handlers[response.identifier]; // call only once
 
-      callback(valid ? null : response.code, response);
+      return callback(valid ? null : response.code, response);
     }
+
+    return response;
   }
 
   //////////
@@ -56,11 +58,11 @@ function RadiusClient(dapper) {
 
     const encoded = radius.encode(request);
     requests[request.identifier] = {
-      raw_packet: encoded,
+      rawPacket: encoded,
       secret: request.secret
     };
 
-    socket.send(encoded, 0, encoded.length, dapper.config.radius.port, 'localhost');
+    return socket.send(encoded, 0, encoded.length, dapper.config.radius.port, 'localhost');
   };
 
   self.request = function({
@@ -82,16 +84,12 @@ function RadiusClient(dapper) {
       ]
     };
 
-    if (typeof arguments[0] === 'function' && !done) {
-      done = arguments[0];
-    }
-
-    Object.private(request, 'send', function(callback) {
+    Object.private(request, 'send', (callback) => {
       self.send(request, callback);
     });
 
     if (typeof done === 'function') {
-      request.send(done);
+      return request.send(done);
     }
 
     return request;
@@ -112,6 +110,6 @@ function RadiusClient(dapper) {
   //////////
 
   return self;
-};
+}
 
 module.exports = RadiusClient;
