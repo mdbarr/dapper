@@ -3,7 +3,7 @@
 const dgram = require('dgram');
 const radius = require('radius');
 
-function RadiusClient(dapper) {
+function RadiusClient(dapper, options = {}) {
   const self = this;
 
   const socket = dgram.createSocket('udp4');
@@ -30,7 +30,7 @@ function RadiusClient(dapper) {
   function handler(message) {
     const response = radius.decode({
       packet: message,
-      secret: dapper.config.radius.secret
+      secret: options.secret || dapper.config.radius.secret
     });
 
     const request = requests[response.identifier];
@@ -62,16 +62,18 @@ function RadiusClient(dapper) {
       secret: request.secret
     };
 
-    return socket.send(encoded, 0, encoded.length, dapper.config.radius.port, 'localhost');
+    return socket.send(encoded, 0, encoded.length,
+      options.port || dapper.config.radius.port,
+      options.host || 'localhost');
   };
 
   self.request = function({
     code = self.constants.request,
-    secret = dapper.config.radius.secret,
+    secret = options.secret || dapper.config.radius.secret,
     identifier = ++requestCount,
     ip = '127.0.0.1',
-    username = dapper.config.datastore.data.users[0].username,
-    password = dapper.config.datastore.data.users[0].password
+    username = options.username || dapper.config.datastore.data.users[0].username,
+    password = options.password || dapper.config.datastore.data.users[0].password
   } = {}, done) {
     const request = {
       code,
