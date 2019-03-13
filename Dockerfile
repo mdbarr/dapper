@@ -1,6 +1,6 @@
 FROM node:10-alpine
 
-WORKDIR /extracked
+WORKDIR /dapper
 
 COPY package.json yarn.lock ./
 
@@ -10,5 +10,6 @@ RUN yarn --silent install --production=true
 
 COPY . .
 
-CMD [ "yarn", "start" ]
+EXPOSE 389 636 1812 1389
 
+CMD [ "yarn", "start" ]
