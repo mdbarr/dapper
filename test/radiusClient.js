@@ -86,7 +86,7 @@ function RadiusClient(dapper, options = {}) {
       ]
     };
 
-    Object.private(request, 'send', (callback) => {
+    Object.$private(request, 'send', (callback) => {
       self.send(request, callback);
     });
 

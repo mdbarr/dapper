@@ -17,7 +17,7 @@ function searchParser(dapper, error, res, callback) {
   };
 
   res.on('searchEntry', (entry) => {
-    result.items.push(Object.clone(entry.object));
+    result.items.push(Object.$clone(entry.object));
   });
 
   res.on('searchReference', (referral) => {
