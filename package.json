@@ -10,12 +10,12 @@
   "dependencies": {
     "@mdbarr/ldapjs": "^1.1.0",
     "async": "^2.6.2",
-    "barrkeep": "^2.0.0",
+    "barrkeep": "^2.0.1",
     "cidr-matcher": "^2.1.0",
-    "mongodb": "^3.2.3",
+    "mongodb": "^3.2.4",
     "otplib": "^11.0.0",
     "radius": "^1.1.4",
-    "restify": "^8.3.1",
+    "restify": "^8.3.2",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
