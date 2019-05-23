@@ -24,7 +24,7 @@
     "should": "^13.2.3"
   },
   "scripts": {
-    "docker:build": "docker build --rm -t dapper .",
+    "build": "docker build --rm -t dapper .",
     "lint": "eslint *.js lib/*.js utils/*.js test/*.js test/**/*.js",
     "start": "./index.js",
     "test": "jest --runInBand"
