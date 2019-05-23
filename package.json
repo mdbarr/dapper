@@ -12,6 +12,7 @@
     "async": "^3.0.0",
     "barrkeep": "^2.0.1",
     "cidr-matcher": "^2.1.0",
+    "minimist": "^1.2.0",
     "mongodb": "^3.2.5",
     "otplib": "^11.0.0",
     "radius": "^1.1.4",
