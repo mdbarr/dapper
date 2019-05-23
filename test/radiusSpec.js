@@ -2,7 +2,7 @@
 
 const should = require('should');
 const Dapper = require('../lib/dapper');
-const RadiusClient = require('./radiusClient');
+const RadiusClient = require('../utils/radiusClient');
 
 describe('Radius Spec', () => {
   let dapper;

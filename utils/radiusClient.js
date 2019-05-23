@@ -3,6 +3,8 @@
 const dgram = require('dgram');
 const radius = require('radius');
 
+let port = 49000;
+
 function RadiusClient(dapper, options = {}) {
   const self = this;
 
@@ -102,7 +104,7 @@ function RadiusClient(dapper, options = {}) {
   self.bind = function(callback) {
     socket.on('message', handler);
 
-    socket.bind(49001, callback);
+    socket.bind(++port, callback);
   };
 
   self.unbind = function(callback) {
