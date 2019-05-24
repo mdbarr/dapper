@@ -1,12 +1,16 @@
 {
   "name": "dapper",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Schema-less LDAP and Radius Server for small organizations",
   "main": "index.js",
   "repository": "git@github.com:mdbarr/dapper",
   "author": "Mark Barr <mark@hyperingenuity.com>",
   "license": "MIT",
   "private": false,
+  "bin": {
+    "dapper": "./cli.js"
+  },
+  "main": "./lib/dapper.js",
   "dependencies": {
     "@mdbarr/ldapjs": "^1.1.0",
     "async": "^3.0.0",
@@ -29,7 +33,7 @@
   "scripts": {
     "build": "docker build --rm -t dapper .",
     "lint": "eslint *.js lib/*.js utils/*.js test/*.js test/**/*.js",
-    "start": "./index.js",
+    "start": "./cli.js",
     "test": "jest --runInBand"
   }
 }
