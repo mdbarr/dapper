@@ -852,6 +852,11 @@ convert-source-map@^1.1.0, convert-source-map@^1.4.0:
   dependencies:
     safe-buffer "~5.1.1"
 
+cookie@^0.1.2:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.1.5.tgz#6ab9948a4b1ae21952cd2588530a4722d4044d7c"
+  integrity sha1-armUiksa4hlSzSWIUwpHItQETXw=
+
 copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
@@ -3421,7 +3426,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@^2.87.0:
+request@^2.87.0, request@^2.88.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
@@ -3508,6 +3513,13 @@ resolve@^1.10.0, resolve@^1.3.2:
   integrity sha512-WL2pBDjqT6pGUNSUzMw00o4T7If+z4H2x3Gz893WoUQ5KW8Vr9txp00ykiP16VBaZF5+j/OcXJHZ9+PCvdiDKw==
   dependencies:
     path-parse "^1.0.6"
+
+restify-cookies@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/restify-cookies/-/restify-cookies-0.2.5.tgz#6e6a2d5b094627b44e684a02bd48a632a85c4e2a"
+  integrity sha512-IDw3ZJ/aTczeuSvPGWXQ2WcY/39QuxJ11DvPbA+eE/YtNBhIFwhGWNgg/Rw3zOwfJYeLGvqsGWFrCBjvGeV2XQ==
+  dependencies:
+    cookie "^0.1.2"
 
 restify-errors@^8.0.0:
   version "8.0.0"

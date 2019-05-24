@@ -17,11 +17,13 @@
     "otplib": "^11.0.0",
     "radius": "^1.1.4",
     "restify": "^8.3.2",
+    "restify-cookies": "^0.2.5",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
     "jest": "^24.8.0",
+    "request": "^2.88.0",
     "should": "^13.2.3"
   },
   "scripts": {
