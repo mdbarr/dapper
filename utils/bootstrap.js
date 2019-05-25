@@ -15,59 +15,79 @@ module.exports = function(data, options) {
     assert.equal(null, error);
     const db = client.db();
 
-    const collections = [ {
-      field: 'config',
-      collection: db.collection('config'),
-      model: null
-    }, {
-      field: 'domains',
-      collection: db.collection('domains'),
-      model: 'domain',
-      mapping: 'domain'
-    }, {
-      field: 'organizations',
-      collection: db.collection('organizations'),
-      model: 'organization',
-      mapping: 'name'
-    }, {
-      field: 'groups',
-      collection: db.collection('groups'),
-      model: 'group',
-      mapping: 'name'
-    }, {
-      field: 'users',
-      collection: db.collection('users'),
-      model: 'user',
-      mapping: null
-    } ];
-
-    return async.each(collections, (category, next) => {
-      if (category.field === 'config') {
-        return category.collection.updateOne({ id: 'dapper-config' },
-          { $set: data.config },
-          { upsert: true }, next);
+    function dropDatabase(callback) {
+      if (options.drop) {
+        console.log('Dropping database...');
+        return db.dropDatabase(callback);
       }
+      return callback();
+    }
 
-      const models = [];
-      for (let item of data[category.field]) {
-        if (category.mapping && typeof item === 'string') {
-          item = { [category.mapping]: item };
+    dropDatabase(() => {
+      const collections = [ {
+        field: 'config',
+        collection: db.collection('config'),
+        model: null
+      }, {
+        field: 'domains',
+        collection: db.collection('domains'),
+        model: 'domain',
+        mapping: 'domain'
+      }, {
+        field: 'organizations',
+        collection: db.collection('organizations'),
+        model: 'organization',
+        mapping: 'name'
+      }, {
+        field: 'groups',
+        collection: db.collection('groups'),
+        model: 'group',
+        mapping: 'name'
+      }, {
+        field: 'users',
+        collection: db.collection('users'),
+        model: 'user',
+        mapping: null
+      } ];
+
+      return async.each(collections, (category, next) => {
+        if (category.field === 'config') {
+          if (data.config && Object.keys(data.config).length) {
+            return category.collection.updateOne({ id: 'dapper-config' },
+              { $set: data.config },
+              { upsert: true }, () => {
+                console.log('Imported configuration.');
+                return next();
+              });
+          }
+          return next();
         }
-        const model = dapper.models[category.model](item);
-        models.push(model);
-      }
 
-      return async.each(models, (item, step) => {
-        category.collection.updateOne({ id: item.id },
-          { $set: item },
-          { upsert: true }, step);
-      }, (error) => {
-        assert.equal(null, error);
+        if (Array.isArray(data[category.field]) && data[category.field].length) {
+          const models = [];
+          for (let item of data[category.field]) {
+            if (category.mapping && typeof item === 'string') {
+              item = { [category.mapping]: item };
+            }
+            const model = dapper.models[category.model](item);
+            models.push(model);
+          }
+
+          return async.each(models, (item, step) => {
+            category.collection.updateOne({ id: item.id },
+              { $set: item },
+              { upsert: true }, step);
+          }, (error) => {
+            assert.equal(null, error);
+            console.log(`Imported ${ models.length } ${ category.field }.`);
+            return next();
+          });
+        }
         return next();
+      }, () => {
+        console.log('Done.');
+        client.close();
       });
-    }, function() {
-      console.log('Done.');
-      client.close();
     });
   });
 };
