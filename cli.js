@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 'use strict';
+
 const fs = require('fs');
 const path = require('path');
 const minimist = require('minimist');
@@ -36,5 +37,11 @@ if (options.import) {
   importer(data, options, config);
 } else {
   const dapper = new Dapper(config);
-  dapper.boot();
+  dapper.boot((error) => {
+    if (error) {
+      console.log('Error booting Dapper:', error.message);
+      process.exit(1);
+    }
+    console.log('Dapper server ready!');
+  });
 }
