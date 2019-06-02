@@ -2,7 +2,7 @@
   "name": "dapper",
   "version": "0.0.11",
   "description": "Schema-less LDAP and Radius Server for small organizations",
-  "main": "index.js",
+  "main": "./lib/dapper.js",
   "repository": "git@github.com:mdbarr/dapper",
   "author": "Mark Barr <mark@hyperingenuity.com>",
   "license": "MIT",
@@ -10,15 +10,14 @@
   "bin": {
     "dapper": "./cli.js"
   },
-  "main": "./lib/dapper.js",
   "dependencies": {
     "@mdbarr/ldapjs": "^1.1.0",
-    "async": "^3.0.0",
+    "async": "^3.0.1",
     "barrkeep": "^2.0.1",
     "cidr-matcher": "^2.1.0",
     "minimist": "^1.2.0",
-    "mongodb": "^3.2.5",
-    "otplib": "^11.0.0",
+    "mongodb": "^3.2.6",
+    "otplib": "^11.0.1",
     "radius": "^1.1.4",
     "restify": "^8.3.2",
     "restify-cookies": "^0.2.5",
