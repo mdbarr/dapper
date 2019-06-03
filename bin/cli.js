@@ -5,8 +5,8 @@
 const fs = require('fs');
 const path = require('path');
 const minimist = require('minimist');
-const Dapper = require('./lib/dapper');
-const importer = require('./utils/import');
+const Dapper = require('../lib/dapper');
+const importer = require('../utils/import');
 
 const DEFAULT_CONFIG = '/etc/dapper.config.js';
 
@@ -26,6 +26,15 @@ try {
   }
 } catch (error) {
   console.log('Error loading config file:', error.message);
+}
+
+if (process.env.DAPPER_MONGO_URL || options.url) {
+  config.datastore = config.datastore || {};
+  config.datastore.provider = 'mongo';
+  config.datastore.url = process.env.DAPPER_MONGO_URL || options.url;
+} else if (process.env.DAPPER_DATASTORE || options.datastore) {
+  config.datastore = config.datastore || {};
+  config.datastore.provider = process.env.DAPPER_DATASTORE || options.datastore;
 }
 
 //////////

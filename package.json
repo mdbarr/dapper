@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "bin": {
-    "dapper": "./cli.js"
+    "dapper": "./bin/cli.js"
   },
   "dependencies": {
     "@mdbarr/ldapjs": "^1.1.0",
@@ -31,8 +31,8 @@
   },
   "scripts": {
     "build": "docker build --rm -t dapper .",
-    "lint": "eslint *.js lib/*.js utils/*.js test/*.js test/**/*.js",
-    "start": "./cli.js",
+    "lint": "eslint *.js bin/*.js lib/*.js utils/*.js test/*.js test/**/*.js",
+    "start": "./bin/cli.js",
     "test": "jest --runInBand"
   }
 }
