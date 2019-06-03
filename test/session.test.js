@@ -62,6 +62,21 @@ describe('Session Spec', () => {
       });
     });
 
+    it('should access a protected endpoint', (done) => {
+      request.get({
+        url: url.replace('session', 'datastore'),
+        jar,
+        json: true
+      }, (error, response, body) => {
+        should(error).be.null();
+        should(response.statusCode).be.equal(200);
+
+        should(body).have.property('datastore', 'MemoryStore');
+
+        done();
+      });
+    });
+
     it('should successfully logout', (done) => {
       request.del({
         url,
