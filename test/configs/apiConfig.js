@@ -27,6 +27,7 @@ module.exports = {
         password: 'password',
         name: 'Fooey',
         email: 'foo@dapper.test',
+        permissions: { administrator: true },
         organizations: [ 'QA', 'Dev' ],
         groups: [ 'Admin' ]
       } ]
