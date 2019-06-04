@@ -19,7 +19,7 @@ let config = {};
 
 try {
   if (options.config) {
-    const configFile = path.resolve(__dirname, options.config);
+    const configFile = path.resolve(process.cwd(), options.config);
     config = require(configFile);
   } else if (fs.existsSync(DEFAULT_CONFIG)) {
     config = require(DEFAULT_CONFIG);
@@ -40,7 +40,7 @@ if (process.env.DAPPER_MONGO_URL || options.url) {
 //////////
 
 if (options.import) {
-  const dataFile = path.resolve(__dirname, options.import);
+  const dataFile = path.resolve(process.cwd(), options.import);
   const data = require(dataFile);
 
   importer(data, options, config);
