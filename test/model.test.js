@@ -9,7 +9,11 @@ describe('Model Spec', () => {
   let dapper;
 
   it('should create a new Dapper instance', () => {
-    dapper = new Dapper();
+    dapper = new Dapper({ options: {
+      addEmailDomains: true,
+      parseEmailToDC: true,
+      allowEmpty: true
+    } });
     dapper.should.be.ok();
   });
 
