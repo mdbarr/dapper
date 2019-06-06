@@ -132,6 +132,8 @@ describe('Model Spec', () => {
       ldapUser.should.be.ok();
       ldapUser.should.have.property('object', 'ldapUser');
 
+      dapper.tree.ldap.domains.should.have.key('dc=example, dc=com');
+
       console.debug(ldapUser);
     });
 
