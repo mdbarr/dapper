@@ -48,9 +48,9 @@ if (options.import) {
   const dapper = new Dapper(config);
   dapper.boot((error) => {
     if (error) {
-      console.log('Error booting Dapper:', error.message);
+      dapper.log.error('Error booting Dapper:', error.message);
       process.exit(1);
     }
-    console.log('Dapper server ready!');
+    dapper.log.info('Dapper server ready!');
   });
 }

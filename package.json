@@ -21,7 +21,8 @@
     "radius": "^1.1.4",
     "restify": "^8.3.2",
     "restify-cookies": "^0.2.5",
-    "uuid": "^3.3.2"
+    "uuid": "^3.3.2",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
