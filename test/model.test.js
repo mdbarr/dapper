@@ -109,7 +109,7 @@ describe('Model Spec', () => {
       user.should.be.ok();
       user.should.have.property('object', 'user');
 
-      console.debug(user);
+      dapper.log.debug(user);
     });
 
     it('should validate the user object password', () => {
@@ -134,7 +134,7 @@ describe('Model Spec', () => {
 
       dapper.tree.ldap.domains.should.have.key('dc=example, dc=com');
 
-      console.debug(ldapUser);
+      dapper.log.debug(ldapUser);
     });
 
     it('should validate the ldap user DNs', () => {
