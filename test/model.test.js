@@ -112,18 +112,33 @@ describe('Model Spec', () => {
       dapper.log.debug(user);
     });
 
-    it('should validate the user object password', () => {
+    it('should update the user credentials', (done) => {
+      dapper.auth.hashPassword(user.password, (error, hash) => {
+        if (error) {
+          throw error;
+        }
+        user.password = hash;
+        user.mfa = dapper.auth.generateSecret();
+        done();
+      });
+    });
+
+    it('should validate the user object password', (done) => {
       user.password.should.not.equal('password');
-      user.password.should.startWith('sha256:');
-      should(dapper.util.validatePassword('password', user.password)).be.true();
+      user.password.should.startWith('$argon2');
+      dapper.auth.validatePassword('password', user.password, (error, valid) => {
+        should(error).be.null();
+        should(valid).be.true();
+        done();
+      });
     });
 
     it('should validate the user mfa token', () => {
       user.mfa.should.be.ok();
       user.mfa.should.have.length(32);
 
-      const token = dapper.util.generateToken(user.mfa);
-      should(dapper.util.validateToken(token, user.mfa)).be.true();
+      const token = dapper.auth.generateToken(user.mfa);
+      should(dapper.auth.validateToken(token, user.mfa)).be.true();
     });
 
     it('should create an ldap user object', () => {

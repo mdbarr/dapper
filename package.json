@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@mdbarr/ldapjs": "^1.1.0",
+    "argon2": "^0.23.0",
     "async": "^3.0.1",
     "barrkeep": "^2.0.1",
     "cidr-matcher": "^2.1.0",

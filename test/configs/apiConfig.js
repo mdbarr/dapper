@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+  options: { allowPlainTextPasswords: true },
   radius: { enabled: false },
   ldap: { enabled: false },
   api: { enabled: true },

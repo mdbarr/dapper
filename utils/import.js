@@ -64,23 +64,31 @@ module.exports = function(data, options) {
         }
 
         if (Array.isArray(data[category.field]) && data[category.field].length) {
-          const models = [];
-          for (let item of data[category.field]) {
+          return async.map(data[category.field], (item, done) => {
             if (category.mapping && typeof item === 'string') {
               item = { [category.mapping]: item };
             }
             const model = dapper.models[category.model](item);
-            models.push(model);
-          }
-
-          return async.each(models, (item, step) => {
-            category.collection.updateOne({ id: item.id },
-              { $set: item },
-              { upsert: true }, step);
-          }, (error) => {
-            assert.equal(null, error);
-            console.log(`Imported ${ models.length } ${ category.field }.`);
-            return next();
+            if (model.object === 'user') {
+              dapper.auth.ensureSecure(model.password, (error, hash) => {
+                if (error) {
+                  return done(error);
+                }
+                model.password = hash;
+                return done(null, model);
+              });
+            }
+            return done(null, model);
+          }, (error, models) => {
+            return async.each(models, (item, step) => {
+              category.collection.updateOne({ id: item.id },
+                { $set: item },
+                { upsert: true }, step);
+            }, (error) => {
+              assert.equal(null, error);
+              console.log(`Imported ${ models.length } ${ category.field }.`);
+              return next();
+            });
           });
         }
         return next();

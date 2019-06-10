@@ -73,7 +73,7 @@ describe('Access Spec', () => {
     });
 
     it('should successfully bind to the ldap server', (done) => {
-      const token = dapper.util.generateToken(config.datastore.data.users[1].mfa);
+      const token = dapper.auth.generateToken(config.datastore.data.users[1].mfa);
       client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', `secret${ token }`, (error, result) => {
         should(error).be.null();
         should(result).be.ok();

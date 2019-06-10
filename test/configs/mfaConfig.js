@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+  options: { allowPlainTextPasswords: true },
   radius: { secret: 'secure' },
   api: { enabled: false },
   datastore: {
