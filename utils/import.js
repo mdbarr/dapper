@@ -70,7 +70,7 @@ module.exports = function(data, options) {
             }
             const model = dapper.models[category.model](item);
             if (model.object === 'user') {
-              dapper.auth.ensureSecure(model.password, (error, hash) => {
+              return dapper.auth.ensureSecure(model.password, (error, hash) => {
                 if (error) {
                   return done(error);
                 }
