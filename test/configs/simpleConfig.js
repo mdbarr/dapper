@@ -24,6 +24,11 @@ module.exports = {
         email: 'foo@dapper.test',
         organizations: [ 'QA', 'Dev' ],
         groups: [ 'Admin' ]
+      }, {
+        username: 'bar',
+        password: 'password',
+        name: 'Barney',
+        email: 'bar@dapper.test'
       } ]
     }
   }

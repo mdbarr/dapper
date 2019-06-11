@@ -13,6 +13,7 @@ function searchParser(dapper, error, res, callback) {
   const result = {
     reference: null,
     items: [],
+    pages: 0,
     status: 0
   };
 
@@ -22,6 +23,10 @@ function searchParser(dapper, error, res, callback) {
 
   res.on('searchReference', (referral) => {
     result.reference = referral.uris.join();
+  });
+
+  res.on('page', () => {
+    result.pages++;
   });
 
   res.on('error', (err) => {
@@ -69,7 +74,7 @@ describe('Search Spec', () => {
   });
 
   describe('Search Tests', () => {
-    it('should perform and validate a base scope search', (done) => {
+    it('should perform and validate a filtered base scope search', (done) => {
       client.search('uid=foo, ou=Users, o=QA, dc=dapper, dc=test',
         { filter: '(&(cn=Fooey)(email=foo@dapper.test))' }, (err, res) => {
           searchParser(dapper, err, res, (error, result) => {
@@ -131,6 +136,34 @@ describe('Search Spec', () => {
           result.items[0].should.have.property('cn', 'Fooey');
           result.items[0].should.have.property('sn', 'Fooey');
           result.items[0].should.not.have.property('email');
+          done();
+        });
+      });
+    });
+
+    it('should perform and validate an unfiltered sub scope search', (done) => {
+      client.search('dc=dapper, dc=test', { scope: 'sub' }, (err, res) => {
+        searchParser(dapper, err, res, (error, result) => {
+          result.should.have.property('items');
+          result.items.should.be.instanceOf(Array);
+          result.items.should.have.length(7);
+          result.pages.should.be.equal(0);
+          done();
+        });
+      });
+    });
+
+    it('should perform and validate an unfiltered, paged sub scope search', (done) => {
+      client.search('dc=dapper, dc=test', {
+        paged: { pageSize: 2 },
+        scope: 'sub',
+        sizeLimit: 100
+      }, (err, res) => {
+        searchParser(dapper, err, res, (error, result) => {
+          result.should.have.property('items');
+          result.items.should.be.instanceOf(Array);
+          result.items.should.have.length(7);
+          result.pages.should.be.equal(4);
           done();
         });
       });
