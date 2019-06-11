@@ -2,6 +2,7 @@
 
 module.exports = {
   options: { allowPlainTextPasswords: true },
+  logs: { console: 'error' },
   radius: { enabled: false },
   ldap: { enabled: false },
   api: { enabled: true },

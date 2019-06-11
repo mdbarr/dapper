@@ -51,6 +51,5 @@ if (options.import) {
       dapper.log.error('Error booting Dapper:', error.message);
       process.exit(1);
     }
-    dapper.log.info('Dapper server ready!');
   });
 }

@@ -2,6 +2,7 @@
 
 module.exports = {
   options: { allowPlainTextPasswords: true },
+  logs: { console: 'error' },
   radius: { secret: 'secure' },
   api: { enabled: false },
   datastore: {
