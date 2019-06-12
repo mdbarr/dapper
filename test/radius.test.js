@@ -30,8 +30,19 @@ describe('Radius Spec', () => {
   });
 
   describe('Access Request Tests', () => {
-    it('should send and validate a successful access request', (done) => {
-      client.request({}, (error, response) => {
+    it('should send and validate a successful access request with username', (done) => {
+      client.request({ username: 'foo' }, (error, response) => {
+        should(error).be.null();
+
+        should(response).be.ok();
+        response.should.have.property('code', client.constants.accepted);
+
+        done();
+      });
+    });
+
+    it('should send and validate a successful access request with email', (done) => {
+      client.request({ username: 'foo@dapper.test' }, (error, response) => {
         should(error).be.null();
 
         should(response).be.ok();
