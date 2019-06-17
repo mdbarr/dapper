@@ -24,7 +24,7 @@ describe('Access Spec', () => {
     });
 
     it('should create an ldap client', () => {
-      client = ldap.createClient({ url: 'ldap://127.0.0.1:389' });
+      client = ldap.createClient({ url: dapper.ldap.url });
     });
   });
 

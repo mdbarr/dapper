@@ -36,6 +36,6 @@
     "build": "docker build --rm -t dapper .",
     "lint": "eslint *.js bin/*.js lib/*.js utils/*.js test/*.js test/**/*.js",
     "start": "./bin/cli.js",
-    "test": "jest --runInBand"
+    "test": "jest"
   }
 }

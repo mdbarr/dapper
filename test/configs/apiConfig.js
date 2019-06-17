@@ -5,7 +5,10 @@ module.exports = {
   logs: { console: 'error' },
   radius: { enabled: false },
   ldap: { enabled: false },
-  api: { enabled: true },
+  api: {
+    port: 0,
+    enabled: true
+  },
   sessions: {
     sync: false,
     mfaRequired: false,

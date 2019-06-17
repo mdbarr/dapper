@@ -3,7 +3,11 @@
 module.exports = {
   options: { allowPlainTextPasswords: true },
   logs: { console: 'error' },
-  radius: { secret: 'secure' },
+  radius: {
+    port: 0,
+    secret: 'secure'
+  },
+  ldap: { port: 0 },
   api: { enabled: false },
   datastore: {
     provider: 'memory',
