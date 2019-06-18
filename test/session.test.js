@@ -26,6 +26,7 @@ describe('Session Spec', () => {
   describe('Session Tests', () => {
     let url;
     let jar;
+    let session;
 
     it('should login and validate the session', (done) => {
       url = `http://127.0.0.1:${ dapper.config.api.port }/api/session`;
@@ -41,8 +42,11 @@ describe('Session Spec', () => {
         }
       }, (error, response, body) => {
         should(error).be.null();
+        should(body).have.property('id');
         should(body).have.property('user');
         should(body.user).have.property('username', 'foo');
+
+        session = body.id;
 
         done();
       });
@@ -72,6 +76,25 @@ describe('Session Spec', () => {
         should(response.statusCode).be.equal(200);
 
         should(body).have.property('datastore', 'MemoryStore');
+
+        done();
+      });
+    });
+
+    it('should login again and validate the session is the same', (done) => {
+      request.post({
+        url,
+        jar,
+        json: true,
+        body: {
+          username: 'foo',
+          password: 'password'
+        }
+      }, (error, response, body) => {
+        should(error).be.null();
+        should(body).have.property('id', session);
+        should(body).have.property('user');
+        should(body.user).have.property('username', 'foo');
 
         done();
       });
