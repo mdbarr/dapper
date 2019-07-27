@@ -12,5 +12,5 @@ COPY --from=dapper-ui /dapper-ui/dist dist
 COPY package.json yarn.lock ./
 RUN yarn --silent install --production=true
 COPY . .
-EXPOSE 389 636 1812 1389
+EXPOSE 389 636 1812/udp 1389
 CMD [ "yarn", "start" ]

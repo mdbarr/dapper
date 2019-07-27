@@ -29,7 +29,7 @@ services:
     ports:
        - 389:389
        - 636:636
-       - 1812:1812
+       - 1812:1812/udp
        - 1389:1389
     environment:
       - DAPPER_MONGO_URL=mongodb://mongo:27017/dapper
