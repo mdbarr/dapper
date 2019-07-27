@@ -14,10 +14,10 @@
     "@mdbarr/ldapjs": "^1.1.0",
     "argon2": "^0.24.0",
     "async": "^3.1.0",
-    "barrkeep": "^2.2.2",
-    "cidr-matcher": "^2.1.0",
+    "barrkeep": "^2.2.4",
+    "cidr-matcher": "^2.1.1",
     "minimist": "^1.2.0",
-    "mongodb": "^3.2.7",
+    "mongodb": "^3.3.0-beta2",
     "otplib": "^11.0.1",
     "radius": "^1.1.4",
     "restify": "^8.3.3",
@@ -27,7 +27,7 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "eslint": "^6.0.1",
+    "eslint": "^6.1.0",
     "jest": "^24.8.0",
     "request": "^2.88.0",
     "should": "^13.2.3"
