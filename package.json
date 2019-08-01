@@ -1,5 +1,5 @@
 {
-  "name": "dapper",
+  "name": "@mdbarr/dapper",
   "version": "0.1.0",
   "description": "Schema-less LDAP and Radius Server for small organizations",
   "main": "./lib/dapper.js",
