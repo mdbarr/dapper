@@ -20,7 +20,7 @@
     "mongodb": "^3.3.0-beta2",
     "otplib": "^11.0.1",
     "radius": "^1.1.4",
-    "restify": "^8.3.3",
+    "restify": "^8.4.0",
     "restify-cookies": "^0.2.5",
     "restify-cors-middleware": "^1.1.1",
     "uuid": "^3.3.2",
