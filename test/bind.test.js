@@ -30,6 +30,14 @@ describe('Bind Spec', () => {
       client = ldap.createClient({ url: dapper.ldap.url });
     });
 
+    it('should verify that rebuilding the tree produces identical data', () => {
+      const size = dapper.tree.ldap.binds.size;
+
+      dapper.tree.rebuild();
+
+      dapper.tree.ldap.binds.size.should.be.equal(size);
+    });
+
     it('should attempt to bind to the ldap server with a bad uid', (done) => {
       client.bind('uid=test, ou=Users, dc=dapper, dc=test', 'secret', (error) => {
         should(error).not.be.null();
