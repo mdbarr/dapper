@@ -14,7 +14,7 @@
     "@mdbarr/ldapjs": "^1.1.0",
     "argon2": "^0.24.0",
     "async": "^3.1.0",
-    "barrkeep": "^2.2.4",
+    "barrkeep": "^2.2.5",
     "cidr-matcher": "^2.1.1",
     "minimist": "^1.2.0",
     "mongodb": "^3.3.0-beta2",
