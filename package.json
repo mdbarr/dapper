@@ -1,6 +1,6 @@
 {
   "name": "@mdbarr/dapper",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Schema-less LDAP and Radius Server for small organizations",
   "main": "./lib/dapper.js",
   "repository": "git@github.com:mdbarr/dapper",
