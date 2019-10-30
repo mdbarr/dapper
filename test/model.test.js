@@ -171,12 +171,18 @@ describe('Model Spec', () => {
     });
 
     it('should verify dynamic user distinguished names', () => {
-      dapper.tree.ldap.dns.should.have.key('email=test@example.com, ou=Users, dc=example, dc=com');
-      dapper.tree.ldap.dns.should.have.key('email=test@example.com, ou=Users, dc=test, dc=example, dc=com');
-      dapper.tree.ldap.dns.should.have.key('login=test, ou=Users, dc=test, dc=example, dc=com');
-      dapper.tree.ldap.dns.should.have.key('login=test@example.com, ou=Users, dc=example, dc=com');
-      dapper.tree.ldap.dns.should.have.key('uid=test, ou=Users, o=Product, dc=test, dc=example, dc=com');
-      dapper.tree.ldap.dns.should.have.key('uid=test, ou=Users, o=QA, dc=test, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key(
+        'email=test@example.com, ou=Users, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key(
+        'email=test@example.com, ou=Users, dc=test, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key(
+        'login=test, ou=Users, dc=test, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key(
+        'login=test@example.com, ou=Users, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key(
+        'uid=test, ou=Users, o=Product, dc=test, dc=example, dc=com');
+      dapper.tree.ldap.dns.should.have.key(
+        'uid=test, ou=Users, o=QA, dc=test, dc=example, dc=com');
     });
   });
 });

@@ -2,7 +2,7 @@
 
 const CIDRMatcher = require('cidr-matcher');
 
-function AccessControl({
+function AccessControl ({
   allow = [], deny = [], order = 'deny, allow'
 }) {
   if (!Array.isArray(allow)) {

@@ -5,7 +5,7 @@ const radius = require('radius');
 
 let port = 49000;
 
-function RadiusClient(dapper, options = {}) {
+function RadiusClient (dapper, options = {}) {
   const self = this;
 
   const socket = dgram.createSocket('udp4');
@@ -29,7 +29,7 @@ function RadiusClient(dapper, options = {}) {
 
   //////////
 
-  function handler(message) {
+  function handler (message) {
     const response = radius.decode({
       packet: message,
       secret: options.secret || dapper.config.radius.secret

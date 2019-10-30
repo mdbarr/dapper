@@ -15,7 +15,7 @@ module.exports = function(data, options) {
     assert.equal(null, error);
     const db = client.db();
 
-    function dropDatabase(callback) {
+    function dropDatabase (callback) {
       if (options.drop) {
         console.log('Dropping database...');
         return db.dropDatabase(callback);

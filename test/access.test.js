@@ -57,28 +57,31 @@ describe('Access Spec', () => {
 
   describe('Access Tests - MFA Required', () => {
     it('should fail binding without an mfa token', (done) => {
-      client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret', (error, result) => {
-        should(error).not.be.null();
-        should(result).be.undefined();
-        done();
-      });
+      client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret',
+        (error, result) => {
+          should(error).not.be.null();
+          should(result).be.undefined();
+          done();
+        });
     });
 
     it('should fail binding without a bad mfa token', (done) => {
-      client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret000000', (error, result) => {
-        should(error).not.be.null();
-        should(result).be.undefined();
-        done();
-      });
+      client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', 'secret000000',
+        (error, result) => {
+          should(error).not.be.null();
+          should(result).be.undefined();
+          done();
+        });
     });
 
     it('should successfully bind to the ldap server', (done) => {
       const token = dapper.auth.generateToken(config.datastore.data.users[1].mfa);
-      client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', `secret${ token }`, (error, result) => {
-        should(error).be.null();
-        should(result).be.ok();
-        done();
-      });
+      client.bind('uid=bar, ou=Users, o=VPN, dc=dapper, dc=test', `secret${ token }`,
+        (error, result) => {
+          should(error).be.null();
+          should(result).be.ok();
+          done();
+        });
     });
   });
 

@@ -4,7 +4,7 @@ const should = require('should');
 const ldap = require('@mdbarr/ldapjs');
 const Dapper = require('../lib/dapper');
 
-function searchParser(dapper, error, res, callback) {
+function searchParser (dapper, error, res, callback) {
   callback = dapper.util.callback(callback);
   if (error) {
     return callback(error);
@@ -81,7 +81,8 @@ describe('Search Spec', () => {
             result.should.have.property('items');
             result.items.should.be.instanceOf(Array);
             result.items.should.have.length(1);
-            result.items[0].should.have.property('dn', 'uid=foo, ou=Users, o=QA, dc=dapper, dc=test');
+            result.items[0].should.have.property(
+              'dn', 'uid=foo, ou=Users, o=QA, dc=dapper, dc=test');
             done();
           });
         });
