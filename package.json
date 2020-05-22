@@ -12,24 +12,24 @@
   },
   "dependencies": {
     "@mdbarr/ldapjs": "^1.1.0",
-    "argon2": "^0.25.1",
-    "async": "^3.1.1",
-    "barrkeep": "^2.6.0",
+    "argon2": "^0.26.2",
+    "async": "^3.2.0",
+    "barrkeep": "^2.6.1",
     "cidr-matcher": "^2.1.1",
-    "minimist": "^1.2.0",
-    "mongodb": "^3.5.2",
+    "minimist": "^1.2.5",
+    "mongodb": "^3.5.7",
     "otplib": "^12.0.1",
     "radius": "^1.1.4",
     "restify": "^8.5.1",
     "restify-cookies": "^0.2.6",
     "restify-cors-middleware": "^1.1.1",
-    "uuid": "^3.4.0",
+    "uuid": "^8.1.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "jest": "^25.1.0",
-    "request": "^2.88.0",
+    "eslint": "^7.0.0",
+    "jest": "^26.0.1",
+    "request": "^2.88.2",
     "should": "^13.2.3"
   },
   "scripts": {
