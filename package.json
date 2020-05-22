@@ -16,7 +16,6 @@
     "async": "^3.2.0",
     "barrkeep": "^2.6.1",
     "cidr-matcher": "^2.1.1",
-    "minimist": "^1.2.5",
     "mongodb": "^3.5.7",
     "otplib": "^12.0.1",
     "radius": "^1.1.4",
@@ -24,7 +23,8 @@
     "restify-cookies": "^0.2.6",
     "restify-cors-middleware": "^1.1.1",
     "uuid": "^8.1.0",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "yargs": "^15.3.1"
   },
   "devDependencies": {
     "eslint": "^7.0.0",

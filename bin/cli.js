@@ -4,13 +4,12 @@
 
 const fs = require('fs');
 const path = require('path');
-const minimist = require('minimist');
 const Dapper = require('../lib/dapper');
 const importer = require('../utils/import');
 
 const DEFAULT_CONFIG = '/etc/dapper.config.js';
 
-const options = minimist(process.argv.slice(2));
+const options = require('yargs').argv;
 
 //////////
 // Configuration
