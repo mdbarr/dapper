@@ -1,7 +1,7 @@
 'use strict';
 
 const should = require('should');
-const ldap = require('@mdbarr/ldapjs');
+const ldap = require('@metastack/ldapjs');
 const Dapper = require('../lib/dapper');
 
 describe('Access Spec', () => {

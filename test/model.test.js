@@ -3,7 +3,7 @@
 const should = require('should');
 const Dapper = require('../lib/dapper');
 
-const parseDN = require('@mdbarr/ldapjs').parseDN;
+const parseDN = require('@metastack/ldapjs').parseDN;
 
 describe('Model Spec', () => {
   let dapper;
@@ -135,7 +135,7 @@ describe('Model Spec', () => {
 
     it('should validate the user mfa token', () => {
       user.mfa.should.be.ok();
-      user.mfa.should.have.length(32);
+      user.mfa.should.have.length(16);
 
       const token = dapper.auth.generateToken(user.mfa);
       should(dapper.auth.validateToken(token, user.mfa)).be.true();
