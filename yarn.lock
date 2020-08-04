@@ -280,6 +280,21 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
+"@hyperingenuity/ldapjs@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@hyperingenuity/ldapjs/-/ldapjs-1.3.0.tgz#b89c429560c507d27367e7b29d4cac0fc737101a"
+  integrity sha512-qW2EzR8lbJnHOpTKmG2k/N92St5nP5LYxT16eJbiaL5JC8QpzXUEMbHSyNX61SyHPIYP6v3NvYMpLx45jcWxHg==
+  dependencies:
+    asn1 "0.2.4"
+    assert-plus "^1.0.0"
+    async "^3.2.0"
+    backoff "^2.5.0"
+    bunyan "^1.8.14"
+    dashdash "^1.14.0"
+    ldap-filter "0.3.3"
+    once "^1.4.0"
+    verror "^1.8.1"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -461,21 +476,6 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
-
-"@metastack/ldapjs@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@metastack/ldapjs/-/ldapjs-1.2.0.tgz#c7c0fd53f8c5e4a5a4a465c92047ea5a8b1aae0b"
-  integrity sha512-aKBo4hVBb3l9ryXIbXBocs9DdmzY1AjIDhC2pZLciWKIbpm8wPQozPhK4Dp+nutoF3Mk9+xa6QES57GF12QCRA==
-  dependencies:
-    asn1 "0.2.4"
-    assert-plus "^1.0.0"
-    async "^3.2.0"
-    backoff "^2.5.0"
-    bunyan "^1.8.14"
-    dashdash "^1.14.0"
-    ldap-filter "0.3.3"
-    once "^1.4.0"
-    verror "^1.8.1"
 
 "@netflix/nerror@^1.0.0":
   version "1.1.3"

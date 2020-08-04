@@ -1,5 +1,5 @@
 {
-  "name": "@metastack/dapper",
+  "name": "@hyperingenuity/dapper",
   "version": "0.2.0",
   "description": "Schema-less LDAP and Radius Server for small organizations",
   "main": "./lib/dapper.js",
@@ -11,7 +11,7 @@
     "dapper": "./bin/cli.js"
   },
   "dependencies": {
-    "@metastack/ldapjs": "^1.2.0",
+    "@hyperingenuity/ldapjs": "^1.3.0",
     "argon2": "^0.26.2",
     "async": "^3.2.0",
     "barrkeep": "^2.6.6",

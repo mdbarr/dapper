@@ -3,7 +3,7 @@
 const should = require('should');
 const Dapper = require('../lib/dapper');
 
-const parseDN = require('@metastack/ldapjs').parseDN;
+const parseDN = require('@hyperingenuity/ldapjs').parseDN;
 
 describe('Model Spec', () => {
   let dapper;
