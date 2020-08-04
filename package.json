@@ -16,7 +16,7 @@
     "async": "^3.2.0",
     "barrkeep": "^2.6.6",
     "cidr-matcher": "^2.1.1",
-    "mongodb": "^3.5.9",
+    "mongodb": "^3.6.0",
     "otplib": "^12.0.1",
     "radius": "^1.1.4",
     "restify": "^8.5.1",
@@ -27,8 +27,8 @@
     "yargs": "^15.4.1"
   },
   "devDependencies": {
-    "eslint": "^7.5.0",
-    "jest": "^26.1.0",
+    "eslint": "^7.6.0",
+    "jest": "^26.2.2",
     "request": "^2.88.2",
     "should": "^13.2.3"
   },
