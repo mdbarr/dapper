@@ -24,31 +24,33 @@ module.exports = function(data, options) {
     }
 
     dropDatabase(() => {
-      const collections = [ {
-        field: 'config',
-        collection: db.collection('config'),
-        model: null
-      }, {
-        field: 'domains',
-        collection: db.collection('domains'),
-        model: 'domain',
-        mapping: 'domain'
-      }, {
-        field: 'organizations',
-        collection: db.collection('organizations'),
-        model: 'organization',
-        mapping: 'name'
-      }, {
-        field: 'groups',
-        collection: db.collection('groups'),
-        model: 'group',
-        mapping: 'name'
-      }, {
-        field: 'users',
-        collection: db.collection('users'),
-        model: 'user',
-        mapping: null
-      } ];
+      const collections = [
+        {
+          field: 'config',
+          collection: db.collection('config'),
+          model: null,
+        }, {
+          field: 'domains',
+          collection: db.collection('domains'),
+          model: 'domain',
+          mapping: 'domain',
+        }, {
+          field: 'organizations',
+          collection: db.collection('organizations'),
+          model: 'organization',
+          mapping: 'name',
+        }, {
+          field: 'groups',
+          collection: db.collection('groups'),
+          model: 'group',
+          mapping: 'name',
+        }, {
+          field: 'users',
+          collection: db.collection('users'),
+          model: 'user',
+          mapping: null,
+        },
+      ];
 
       return async.each(collections, (category, next) => {
         if (category.field === 'config') {
@@ -79,17 +81,15 @@ module.exports = function(data, options) {
               });
             }
             return done(null, model);
-          }, (error, models) => {
-            return async.each(models, (item, step) => {
-              category.collection.updateOne({ id: item.id },
-                { $set: item },
-                { upsert: true }, step);
-            }, (error) => {
-              assert.equal(null, error);
-              console.log(`Imported ${ models.length } ${ category.field }.`);
-              return next();
-            });
-          });
+          }, (error, models) => async.each(models, (item, step) => {
+            category.collection.updateOne({ id: item.id },
+              { $set: item },
+              { upsert: true }, step);
+          }, (error) => {
+            assert.equal(null, error);
+            console.log(`Imported ${ models.length } ${ category.field }.`);
+            return next();
+          }));
         }
         return next();
       }, () => {

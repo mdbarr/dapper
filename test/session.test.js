@@ -38,8 +38,8 @@ describe('Session Spec', () => {
         json: true,
         body: {
           username: 'foo',
-          password: 'password'
-        }
+          password: 'password',
+        },
       }, (error, response, body) => {
         should(error).be.null();
         should(body).have.property('id');
@@ -56,7 +56,7 @@ describe('Session Spec', () => {
       request.get({
         url,
         jar,
-        json: true
+        json: true,
       }, (error, response, body) => {
         should(error).be.null();
         should(body).have.property('user');
@@ -70,7 +70,7 @@ describe('Session Spec', () => {
       request.get({
         url: url.replace('session', 'datastore'),
         jar,
-        json: true
+        json: true,
       }, (error, response, body) => {
         should(error).be.null();
         should(response.statusCode).be.equal(200);
@@ -88,8 +88,8 @@ describe('Session Spec', () => {
         json: true,
         body: {
           username: 'foo',
-          password: 'password'
-        }
+          password: 'password',
+        },
       }, (error, response, body) => {
         should(error).be.null();
         should(body).have.property('id', session);
@@ -104,7 +104,7 @@ describe('Session Spec', () => {
       request.del({
         url,
         jar,
-        json: true
+        json: true,
       }, (error, response) => {
         should(error).be.null();
         should(response.statusCode).be.equal(204);
@@ -117,7 +117,7 @@ describe('Session Spec', () => {
       request.get({
         url,
         jar,
-        json: true
+        json: true,
       }, (error, response) => {
         should(error).be.null();
         should(response.statusCode).be.equal(401);
@@ -133,8 +133,8 @@ describe('Session Spec', () => {
         json: true,
         body: {
           username: 'foo',
-          password: 'secret'
-        }
+          password: 'secret',
+        },
       }, (error, response) => {
         should(error).be.null();
         should(response.statusCode).be.equal(401);

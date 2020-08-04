@@ -9,11 +9,13 @@ describe('Model Spec', () => {
   let dapper;
 
   it('should create a new Dapper instance', () => {
-    dapper = new Dapper({ options: {
-      addEmailDomains: true,
-      parseEmailToDC: true,
-      allowEmpty: true
-    } });
+    dapper = new Dapper({
+      options: {
+        addEmailDomains: true,
+        parseEmailToDC: true,
+        allowEmpty: true,
+      },
+    });
     dapper.should.be.ok();
   });
 
@@ -70,7 +72,7 @@ describe('Model Spec', () => {
     it('should create and validate a group object', () => {
       group = dapper.models.group({
         name: 'VPN',
-        organization: 'Product'
+        organization: 'Product',
       });
 
       group.should.be.ok();
@@ -103,7 +105,7 @@ describe('Model Spec', () => {
         name: 'Testy McTest',
         email: 'test@example.com',
         organizations: [ 'QA', 'Product' ],
-        groups: [ 'VPN', 'Vault' ]
+        groups: [ 'VPN', 'Vault' ],
       });
 
       user.should.be.ok();

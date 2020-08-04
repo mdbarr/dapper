@@ -18,7 +18,7 @@ function RadiusClient (dapper, options = {}) {
     password: 'User-Password',
     rejected: 'Access-Reject',
     request: 'Access-Request',
-    username: 'User-Name'
+    username: 'User-Name',
   };
 
   //////////
@@ -32,7 +32,7 @@ function RadiusClient (dapper, options = {}) {
   function handler (message) {
     const response = radius.decode({
       packet: message,
-      secret: options.secret || dapper.config.radius.secret
+      secret: options.secret || dapper.config.radius.secret,
     });
 
     const request = requests[response.identifier];
@@ -40,7 +40,7 @@ function RadiusClient (dapper, options = {}) {
     const valid = radius.verify_response({
       response: message,
       request: request.rawPacket,
-      secret: request.secret
+      secret: request.secret,
     });
 
     if (handlers[response.identifier]) {
@@ -61,7 +61,7 @@ function RadiusClient (dapper, options = {}) {
     const encoded = radius.encode(request);
     requests[request.identifier] = {
       rawPacket: encoded,
-      secret: request.secret
+      secret: request.secret,
     };
 
     return socket.send(encoded, 0, encoded.length,
@@ -75,7 +75,7 @@ function RadiusClient (dapper, options = {}) {
     identifier = ++requestCount,
     ip = '127.0.0.1',
     username = options.username || dapper.config.datastore.data.users[0].username,
-    password = options.password || dapper.config.datastore.data.users[0].password
+    password = options.password || dapper.config.datastore.data.users[0].password,
   } = {}, done) {
     const request = {
       code,
@@ -84,8 +84,8 @@ function RadiusClient (dapper, options = {}) {
       attributes: [
         [ self.constants.ip, ip ],
         [ self.constants.username, username ],
-        [ self.constants.password, password ]
-      ]
+        [ self.constants.password, password ],
+      ],
     };
 
     Object.$private(request, 'send', (callback) => {

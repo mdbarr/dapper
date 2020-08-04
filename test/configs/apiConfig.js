@@ -7,35 +7,35 @@ module.exports = {
   ldap: { enabled: false },
   api: {
     port: 0,
-    enabled: true
+    enabled: true,
   },
   sessions: {
     sync: false,
     mfaRequired: false,
-    shared: true
+    shared: true,
   },
   datastore: {
     provider: 'memory',
     data: {
-      domains: [
-        'dapper.test'
+      domains: [ 'dapper.test' ],
+      organizations: [ 'QA', 'Dev', 'Product' ],
+      groups: [
+        {
+          name: 'Admin',
+          organization: 'Dev',
+        },
       ],
-      organizations: [
-        'QA', 'Dev', 'Product'
+      users: [
+        {
+          username: 'foo',
+          password: 'password',
+          name: 'Fooey',
+          email: 'foo@dapper.test',
+          permissions: { administrator: true },
+          organizations: [ 'QA', 'Dev' ],
+          groups: [ 'Admin' ],
+        },
       ],
-      groups: [ {
-        name: 'Admin',
-        organization: 'Dev'
-      } ],
-      users: [ {
-        username: 'foo',
-        password: 'password',
-        name: 'Fooey',
-        email: 'foo@dapper.test',
-        permissions: { administrator: true },
-        organizations: [ 'QA', 'Dev' ],
-        groups: [ 'Admin' ]
-      } ]
-    }
-  }
+    },
+  },
 };

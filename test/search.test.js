@@ -14,7 +14,7 @@ function searchParser (dapper, error, res, callback) {
     reference: null,
     items: [],
     pages: 0,
-    status: 0
+    status: 0,
   };
 
   res.on('searchEntry', (entry) => {
@@ -92,7 +92,7 @@ describe('Search Spec', () => {
       client.search('dc=dapper, dc=test', {
         filter: '(&(o=QA)(email=*@dapper.test))',
         scope: 'sub',
-        attributes: [ 'dn', 'sn', 'cn' ]
+        attributes: [ 'dn', 'sn', 'cn' ],
       }, (err, res) => {
         searchParser(dapper, err, res, (error, result) => {
           result.should.have.property('items');
@@ -111,7 +111,7 @@ describe('Search Spec', () => {
       client.search('dc=dapper, dc=test', {
         filter: '(&(o=QA)(objectclass=organization))',
         scope: 'one',
-        attributes: [ 'dn', 'o' ]
+        attributes: [ 'dn', 'o' ],
       }, (err, res) => {
         searchParser(dapper, err, res, (error, result) => {
           result.should.have.property('items');
@@ -127,7 +127,7 @@ describe('Search Spec', () => {
       client.search('dc=dapper, dc=test', {
         filter: '(memberOf=cn=Admin, ou=Groups, o=Dev, dc=dapper, dc=test)',
         scope: 'sub',
-        attributes: [ 'dn', 'sn', 'cn' ]
+        attributes: [ 'dn', 'sn', 'cn' ],
       }, (err, res) => {
         searchParser(dapper, err, res, (error, result) => {
           result.should.have.property('items');
@@ -158,7 +158,7 @@ describe('Search Spec', () => {
       client.search('dc=dapper, dc=test', {
         paged: { pageSize: 2 },
         scope: 'sub',
-        sizeLimit: 100
+        sizeLimit: 100,
       }, (err, res) => {
         searchParser(dapper, err, res, (error, result) => {
           result.should.have.property('items');
